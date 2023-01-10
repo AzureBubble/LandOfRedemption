@@ -242,7 +242,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a71affcf44aca6844a5d6aa1de28bf57, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  sheildName: Sheild
+  itemName: Sheild
   sheildDurationTime: 1.5
   sheildCount: 2
 --- !u!212 &798077284

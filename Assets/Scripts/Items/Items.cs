@@ -25,6 +25,11 @@ namespace Items {
             return this.name;
         }
 
+        public virtual bool IsHolder(GameObject obj)
+        {
+            return (obj.GetComponent("ItemHolder")) ? true : false;
+        }
+
         public virtual void SetHolder(GameObject obj)
         {
             this.holder = obj;

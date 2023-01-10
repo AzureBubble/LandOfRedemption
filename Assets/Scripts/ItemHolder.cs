@@ -41,10 +41,10 @@ public class ItemHolder : MonoBehaviour
         if (!this.isItemUsed && Input.GetKey(KeyCode.K))
         {
             this.isItemUsed = true;
-            if (this.collectedItems.ContainsKey("Sheild"))
+            if (this.collectedItems.ContainsKey(this.itemNames[this.itemIndex]))
             {
                 print("使用护盾道具");
-                this.collectedItems["Sheild"].ItemInvoke();
+                this.collectedItems[this.itemNames[this.itemIndex]].ItemInvoke();
             }
             Invoke("SetIsItemUsed", this.coolDownTime);
             Debug.Log("剩余道具数量" + collectedItems.Count);

@@ -11,7 +11,7 @@ public class SheildItemObject : MonoBehaviour
 
     [SerializeField]
     [Tooltip("护盾名称")]
-    private string sheildName;
+    private string itemName;
     [SerializeField]
     [Tooltip("护盾持续时间（单位秒）")]
     private float sheildDurationTime;
@@ -23,7 +23,7 @@ public class SheildItemObject : MonoBehaviour
     void Start()
     {
         isPicked = false;
-        item = new SheildItem(this.sheildName, this.sheildDurationTime, this.sheildCount);
+        item = new SheildItem(this.itemName, this.sheildDurationTime, this.sheildCount);
     }
 
     // Update is called once per frame
@@ -37,10 +37,13 @@ public class SheildItemObject : MonoBehaviour
 
     void OnTriggerEnter2D(Collider2D collider)
     {
-        Debug.Log(this.sheildName + "道具触发碰撞");
-        this.item.SetHolder(collider.gameObject);
-        collider.gameObject.SendMessage("AddItem", this.item);
-        this.isPicked = true;
+        Debug.Log(this.itemName + "道具触发碰撞");
+        if (this.item.IsHolder(collider.gameObject))
+        {
+            this.item.SetHolder(collider.gameObject);
+            collider.gameObject.SendMessage("AddItem", this.item);
+            this.isPicked = true;
+        }
     }
 }
 
