@@ -38,13 +38,14 @@ public class ItemHolder : MonoBehaviour
     #region 调用itemIndex指向的道具: K键使用
     void KeyBoardItemInvoke()
     {
-        if (!this.isItemUsed && Input.GetKey(KeyCode.K))
+        if (!this.isItemUsed && Input.GetKey(KeyCode.K) && this.itemNames.Count > 0)
         {
             this.isItemUsed = true;
-            if (this.collectedItems.ContainsKey(this.itemNames[this.itemIndex]))
+            string itemName = this.itemNames[this.itemIndex];
+            if (this.collectedItems.ContainsKey(itemName))
             {
-                print("使用护盾道具");
-                this.collectedItems[this.itemNames[this.itemIndex]].ItemInvoke();
+                Debug.Log("使用" + itemName + "道具");
+                this.collectedItems[itemName].ItemInvoke();
             }
             Invoke("SetIsItemUsed", this.coolDownTime);
             Debug.Log("剩余道具数量" + collectedItems.Count);
@@ -65,7 +66,7 @@ public class ItemHolder : MonoBehaviour
             if (Input.GetKey(KeyCode.J))
             {
                 this.isItemSwitched = true;
-                this.SetItemIndex(-1);
+                this.SetItemIndex(this.itemNames.Count - 1);
                 Invoke("SetIsItemSwitched", this.coolDownTime);
                 Debug.Log("选中第" + this.itemIndex.ToString() + "个道具" + this.itemNames[this.itemIndex] + " 道具总数为" + this.itemNames.Count.ToString());
             } else if (Input.GetKey(KeyCode.L))
