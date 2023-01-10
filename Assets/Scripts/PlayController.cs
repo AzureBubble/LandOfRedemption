@@ -44,11 +44,11 @@ namespace ClearSky
         
         [Tooltip("Player 跳跃重力")]
         [SerializeField]
-        private float jumpUpGraivity = 3;     // 跳跃重力
+        private float jumpUpGraivity = 0.5f;     // 跳跃重力
 
         [Tooltip("Player 下落重力")]
         [SerializeField]
-        private float fallDownGraivity = 6;   // 下落重力
+        private float fallDownGraivity = 1.0f;   // 下落重力
 
         [Tooltip("Player 落地检测")]
         [SerializeField]
@@ -84,8 +84,10 @@ namespace ClearSky
             inputX = Input.GetAxisRaw("Horizontal");
             inputY = Input.GetAxisRaw("Vertical");
             currentJumpTime += Time.deltaTime;
+            ChangeGraivity();
             if (!isDie)
             {
+                
                 Die();
                 Hurt();
                 Attack();
@@ -98,6 +100,17 @@ namespace ClearSky
         private void OnTriggerEnter2D(Collider2D other)
         {
             anim.SetBool("isJump", false);
+        }
+        void ChangeGraivity()
+        {
+            if (rb.velocity.y > 0)
+            {
+                rb.gravityScale = jumpUpGraivity;
+            }
+            else
+            {
+                rb.gravityScale = fallDownGraivity;
+            }
         }
         void KickBoard()
         {
