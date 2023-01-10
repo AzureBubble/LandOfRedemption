@@ -134,11 +134,11 @@ namespace ClearSky
                 anim.SetBool("isRun", false);
                 if((int)inputX != 0)
                 {
-                transform.localScale = new Vector3(inputX, 1, 1);
-                moveVelocity = new Vector3(inputX, 0, 0);
-                if (!anim.GetBool("isJump"))
+                    transform.localScale = new Vector3(inputX, 1, 1);
+                    moveVelocity = new Vector3(inputX, 0, 0);
+                    if (!anim.GetBool("isJump"))
                     anim.SetBool("isRun", true);
-                transform.position += moveVelocity * moveSpeed * Time.deltaTime;
+                    transform.position += moveVelocity * moveSpeed * Time.deltaTime;
                 }
             }
             else
