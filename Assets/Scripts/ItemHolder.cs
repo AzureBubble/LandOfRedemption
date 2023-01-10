@@ -33,6 +33,21 @@ public class ItemHolder : MonoBehaviour
     {
         KeyBoardItemInvoke();
         KeyBoardItemSwitch();
+        /*if (Input.GetKey(KeyCode.M))
+        {
+            string s = "Item Names: ";
+            foreach (string name in itemNames)
+            {
+                s += (name + ", ");
+            }
+            Debug.Log(s);
+            s = "Items: ";
+            foreach (string name in collectedItems.Keys)
+            {
+                s += (name + ", ");
+            }
+            Debug.Log(s);
+        }*/
     }
 
     #region 调用itemIndex指向的道具: K键使用
@@ -108,4 +123,10 @@ public class ItemHolder : MonoBehaviour
         Debug.Log("移除道具" + name);
     }
     #endregion
+
+    public bool Contains(string name)
+    {
+        return this.itemNames.Contains(name);
+    }
+
 }

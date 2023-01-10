@@ -3,27 +3,21 @@ using System.Collections.Generic;
 using UnityEngine;
 using Items;
 
-public class SheildItemObject : MonoBehaviour
+public class KeyItemObject : MonoBehaviour
 {
     //是否被拾取
     private bool isPicked;
-    private SheildItem item;
+    private KeyItem item;
 
     [SerializeField]
-    [Tooltip("护盾名称")]
+    [Tooltip("钥匙名称")]
     private string itemName;
-    [SerializeField]
-    [Tooltip("护盾持续时间（单位秒）")]
-    private float sheildDurationTime;
-    [SerializeField]
-    [Tooltip("护盾有效次数")]
-    private int sheildCount;
 
     // Start is called before the first frame update
     void Start()
     {
-        isPicked = false;
-        item = new SheildItem(this.itemName, this.sheildDurationTime, this.sheildCount);
+        this.isPicked = false;
+        this.item = new KeyItem(this.itemName);
     }
 
     // Update is called once per frame
@@ -49,28 +43,16 @@ public class SheildItemObject : MonoBehaviour
 
 namespace Items
 {
-    public class SheildItem : Item
+    public class KeyItem: Item
     {
-        //护盾剩余量
-        private int count;
-        //护盾持续时间
-        private float time;
-
-        public SheildItem(string name, float time, int count)
+        public KeyItem(string name)
         {
             this.name = name;
-            this.time = time;
-            this.count = count;
         }
 
         public override void ItemInvoke()
         {
-            this.count--;
-            this.holder.SendMessage("ActivateSheild", time);
-            if (this.count <= 0)
-            {
-                this.holder.SendMessage("RemoveItem", this.GetName());
-            }
+            Debug.Log("使用" + this.GetName() + "，但好像什么都没发生。");
         }
     }
 }

@@ -14,7 +14,6 @@ namespace Items {
         //道具调用方法
         public abstract void ItemInvoke();
 
-
         public virtual void SetName(string name)
         {
             this.name = name;  
@@ -25,7 +24,7 @@ namespace Items {
             return this.name;
         }
 
-        public virtual bool IsHolder(GameObject obj)
+        public static bool IsHolder(GameObject obj)
         {
             return (obj.GetComponent("ItemHolder")) ? true : false;
         }
