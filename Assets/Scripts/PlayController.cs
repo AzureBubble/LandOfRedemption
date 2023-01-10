@@ -24,7 +24,7 @@ namespace ClearSky
 
         [Tooltip("Player 可跳跃次数")]
         [SerializeField]
-        private float jumpCount = 2;              // 可跳跃次数
+        private float jumpCount = 1;              // 可跳跃次数
 
         [Tooltip("Player 跳跃")]
         [SerializeField]
@@ -67,7 +67,6 @@ namespace ClearSky
         private Animator anim;               // 动画
         Vector3 movement;
         private int direction = 1;
-        private bool alive = true;
         private bool isKickboard = false;
         private bool isDie = false;
 
@@ -88,10 +87,10 @@ namespace ClearSky
             if (!isDie)
             {
                 Die();
-                //Hurt();
-                //Attack();
+                Hurt();
+                Attack();
                 Jump();
-                //KickBoard();
+                KickBoard();
                 Run();
 
             }
@@ -120,12 +119,14 @@ namespace ClearSky
             {
                 Vector3 moveVelocity = Vector3.zero;
                 anim.SetBool("isRun", false);
+                if((int)inputX != 0)
+                {
                 transform.localScale = new Vector3(inputX, 1, 1);
                 moveVelocity = new Vector3(inputX, 0, 0);
                 if (!anim.GetBool("isJump"))
                     anim.SetBool("isRun", true);
                 transform.position += moveVelocity * moveSpeed * Time.deltaTime;
-
+                }
             }
             else
             {
@@ -134,17 +135,18 @@ namespace ClearSky
                 moveVelocity = new Vector3(inputX, 0, 0);
                 transform.position += moveVelocity * kickBoardMoveSpeed * Time.deltaTime;
             }
+
         }
         void Jump()
         {
             isGround = Physics2D.OverlapCircle(transform.position, checkRadius, layer);
             if(isGround)
-                jumpCount = 2;
+                jumpCount = 1;
             if(Input.GetKeyDown(KeyCode.Space) && jumpCount > 0)
             {
                 isJump = true;
-                --jumpCount;
                 anim.SetBool("isJump", true);
+                --jumpCount;
             }
             if(!isJump)
                 return;
@@ -159,7 +161,7 @@ namespace ClearSky
                 anim.SetTrigger("attack");
             }
         }
-        /*void Hurt()
+        void Hurt()
         {
             if (Input.GetKeyDown(KeyCode.Alpha2))
             {
@@ -169,7 +171,7 @@ namespace ClearSky
                 else
                     rb.AddForce(new Vector2(5f, 1f), ForceMode2D.Impulse);
             }
-        }*/
+        }
         void Die()
         {
             if (Input.GetKeyDown(KeyCode.Alpha3))
@@ -187,7 +189,7 @@ namespace ClearSky
                 isKickboard = false;
                 anim.SetBool("isKickBoard", false);
                 anim.SetTrigger("idle");
-                alive = true;
+                isDie = false;
             }
         }
     }
