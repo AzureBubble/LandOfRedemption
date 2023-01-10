@@ -12,8 +12,13 @@ public class ItemHolder : MonoBehaviour
     // 当前指向的道具
     private int itemIndex;
 
+    //携带道具在这帧是否被使用
     private bool isItemUsed;
+    //携带道具切换键在这帧是否按下
     private bool isItemSwitched;
+    //附近的场景道具
+    private List<GameObject> nearbyItems;
+
     [SerializeField]
     [Tooltip("键盘输入冷却时间")]
     private float coolDownTime;
@@ -26,6 +31,7 @@ public class ItemHolder : MonoBehaviour
         this.itemIndex = 0;
         this.isItemUsed = false;
         this.isItemSwitched = false;
+        this.nearbyItems = new List<GameObject>();
 }
 
     // Update is called once per frame
@@ -50,7 +56,22 @@ public class ItemHolder : MonoBehaviour
         }*/
     }
 
-    #region 调用itemIndex指向的道具: K键使用
+    void OnTriggerEnter2D(Collider2D collider)
+    {
+        if (Item.IsItem(collider.gameObject))
+        {
+            this.nearbyItems.Add(collider.gameObject);
+        }
+        Debug.Log(collider.gameObject.name + "碰撞。检测到" + this.nearbyItems.Count.ToString() + "个场景道具");
+    }
+
+    void OnTriggerExit2D(Collider2D collider)
+    {
+        this.nearbyItems.Remove(collider.gameObject);
+        Debug.Log(collider.gameObject.name + "离开。检测到" + this.nearbyItems.Count.ToString() + "个场景道具");
+    }
+
+    #region 调用itemIndex指向的道具: K键使用 / 调用场景道具：E键使用
     void KeyBoardItemInvoke()
     {
         if (!this.isItemUsed && Input.GetKey(KeyCode.K) && this.itemNames.Count > 0)
@@ -64,6 +85,14 @@ public class ItemHolder : MonoBehaviour
             }
             Invoke("SetIsItemUsed", this.coolDownTime);
             Debug.Log("剩余道具数量" + collectedItems.Count);
+        }
+
+        if (!this.isItemUsed && Input.GetKey(KeyCode.E) && this.nearbyItems.Count > 0)
+        {
+            this.isItemUsed = true;
+            this.nearbyItems[0].SendMessage("ItemInvoke");
+            Invoke("SetIsItemUsed", this.coolDownTime);
+            Debug.Log("使用物体" + this.nearbyItems[0].name);
         }
     }
 

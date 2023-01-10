@@ -24,14 +24,26 @@ namespace Items {
             return this.name;
         }
 
+        public virtual void SetHolder(GameObject obj)
+        {
+            this.holder = obj;
+        }
+
         public static bool IsHolder(GameObject obj)
         {
             return (obj.GetComponent("ItemHolder")) ? true : false;
         }
 
-        public virtual void SetHolder(GameObject obj)
+        public static bool IsItem(GameObject obj)
         {
-            this.holder = obj;
+            int num = obj.GetComponents<ISceneItem>().Length;
+            return (num > 0) ? true : false;
         }
+        
+    }
+
+    interface ISceneItem
+    {
+        public void ItemInvoke();
     }
 }
