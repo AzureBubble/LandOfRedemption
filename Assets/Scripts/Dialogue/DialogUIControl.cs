@@ -34,7 +34,11 @@ public class DialogUIControl : MonoBehaviour
 
     private void Update()
     {
+<<<<<<< Updated upstream
         if(Button_dialogue.activeSelf && Input.GetKeyDown(KeyCode.R))
+=======
+        if(Button_dialogue.activeSelf && Input.GetKeyDown(KeyCode.E))
+>>>>>>> Stashed changes
         {
             TalkUI.SetActive(true);
         }
