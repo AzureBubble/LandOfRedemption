@@ -1,23 +1,23 @@
-using System.Collections;
+ï»¿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class CameraController : MonoBehaviour
 {
-    // Ïà»úĞÂÎ»ÖÃ
+    // ç›¸æœºæ–°ä½ç½®
     private float newX, newY;
-    //»ñÈ¡±»¼àÊÓ¶ÔÏó
+    //è·å–è¢«ç›‘è§†å¯¹è±¡
     private GameObject moniteredObject;
     [Header("Camera Moving Regulation")]
-    [Tooltip("¸ú×Ù¶ÔÏóÃû")]
+    [Tooltip("è·Ÿè¸ªå¯¹è±¡å")]
     [SerializeField]
     private string moniteredRoleName;
-    [Tooltip("Ïà»úÒÆ¶¯ËÙ¶È")]
+    [Tooltip("ç›¸æœºç§»åŠ¨é€Ÿåº¦")]
     [SerializeField]
     private float cameraSpeed;
-    //Ïà»ú·¢Éú±ä»¯Ê±ÓëÖ÷½ÇµÄÆ«ÒÆ¾àÀë
+    //ç›¸æœºå‘ç”Ÿå˜åŒ–æ—¶ä¸ä¸»è§’çš„åç§»è·ç¦»
     private float offset;
-    //Ïà»ú³¤¿í±È,Ä¬ÈÏ16£º9
+    //ç›¸æœºé•¿å®½æ¯”,é»˜è®¤16ï¼š9
     private float scale;
 
 

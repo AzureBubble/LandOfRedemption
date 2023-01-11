@@ -1,22 +1,22 @@
-using System.Collections;
+ï»¿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using Items;
 
 public class SheildItemObject : MonoBehaviour
 {
-    //ÊÇ·ñ±»Ê°È¡
+    //æ˜¯å¦è¢«æ‹¾å–
     private bool isPicked;
     private SheildItem item;
 
     [SerializeField]
-    [Tooltip("»¤¶ÜÃû³Æ")]
+    [Tooltip("æŠ¤ç›¾åç§°")]
     private string itemName;
     [SerializeField]
-    [Tooltip("»¤¶Ü³ÖĞøÊ±¼ä£¨µ¥Î»Ãë£©")]
+    [Tooltip("æŠ¤ç›¾æŒç»­æ—¶é—´ï¼ˆå•ä½ç§’ï¼‰")]
     private float sheildDurationTime;
     [SerializeField]
-    [Tooltip("»¤¶ÜÓĞĞ§´ÎÊı")]
+    [Tooltip("æŠ¤ç›¾æœ‰æ•ˆæ¬¡æ•°")]
     private int sheildCount;
 
     // Start is called before the first frame update
@@ -37,7 +37,7 @@ public class SheildItemObject : MonoBehaviour
 
     void OnTriggerEnter2D(Collider2D collider)
     {
-        Debug.Log(this.itemName + "µÀ¾ß´¥·¢Åö×²");
+        Debug.Log(this.itemName + "é“å…·è§¦å‘ç¢°æ’");
         if (Item.IsHolder(collider.gameObject))
         {
             this.item.SetHolder(collider.gameObject);
@@ -51,9 +51,9 @@ namespace Items
 {
     public class SheildItem : Item
     {
-        //»¤¶ÜÊ£ÓàÁ¿
+        //æŠ¤ç›¾å‰©ä½™é‡
         private int count;
-        //»¤¶Ü³ÖĞøÊ±¼ä
+        //æŠ¤ç›¾æŒç»­æ—¶é—´
         private float time;
 
         public SheildItem(string name, float time, int count)

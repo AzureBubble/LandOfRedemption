@@ -1,4 +1,4 @@
-using System.Collections;
+锘縰sing System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using Items;
@@ -6,7 +6,7 @@ using Items;
 public class BlackBoardObject : MonoBehaviour, ISceneItem
 {
     [SerializeField]
-    [Tooltip("名称")]
+    [Tooltip("鍚嶇О")]
     private string name;
     private BlackBoardItem item;
     // Start is called before the first frame update
@@ -39,8 +39,8 @@ namespace Items
 
         public override void ItemInvoke()
         {
-            // 发给UI
-            Debug.Log("使用" + this.name);
+            // 鍙戠粰UI
+            Debug.Log("浣跨敤" + this.name);
         }
     }
 }

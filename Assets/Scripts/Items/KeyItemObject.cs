@@ -1,16 +1,16 @@
-using System.Collections;
+ï»¿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using Items;
 
 public class KeyItemObject : MonoBehaviour
 {
-    //ÊÇ·ñ±»Ê°È¡
+    //æ˜¯å¦è¢«æ‹¾å–
     private bool isPicked;
     private KeyItem item;
 
     [SerializeField]
-    [Tooltip("Ô¿³×Ãû³Æ")]
+    [Tooltip("é’¥åŒ™åç§°")]
     private string itemName;
 
     // Start is called before the first frame update
@@ -31,7 +31,7 @@ public class KeyItemObject : MonoBehaviour
 
     void OnTriggerEnter2D(Collider2D collider)
     {
-        Debug.Log(this.itemName + "µÀ¾ß´¥·¢Åö×²");
+        Debug.Log(this.itemName + "é“å…·è§¦å‘ç¢°æ’");
         if (Item.IsHolder(collider.gameObject))
         {
             this.item.SetHolder(collider.gameObject);
@@ -52,7 +52,7 @@ namespace Items
 
         public override void ItemInvoke()
         {
-            Debug.Log("Ê¹ÓÃ" + this.GetName() + "£¬µ«ºÃÏñÊ²Ã´¶¼Ã»·¢Éú¡£");
+            Debug.Log("ä½¿ç”¨" + this.GetName() + "ï¼Œä½†å¥½åƒä»€ä¹ˆéƒ½æ²¡å‘ç”Ÿã€‚");
         }
     }
 }

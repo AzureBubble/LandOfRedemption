@@ -1,3 +1,4 @@
+ï»¿using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -5,22 +6,24 @@ using Items;
 
 public class ItemHolder : MonoBehaviour
 {
-    // ÁĞ±í´æ´¢µÀ¾ßÃû³Æ
+    // åˆ—è¡¨å­˜å‚¨é“å…·åç§°
     private List<string> itemNames;
-    //×Öµä´æ´¢µÀ¾ß¶ÔÏó
+    //å­—å…¸å­˜å‚¨é“å…·å¯¹è±¡
     private Dictionary<string, Item> collectedItems;
-    // µ±Ç°Ö¸ÏòµÄµÀ¾ß
+    //ç‰¹æ®Šä¸»åŠ¨é“å…·å¯¹è±¡
+    private List<string> activeItemNames;
+    // å½“å‰æŒ‡å‘çš„é“å…·
     private int itemIndex;
 
-    //Ğ¯´øµÀ¾ßÔÚÕâÖ¡ÊÇ·ñ±»Ê¹ÓÃ
+    //æºå¸¦é“å…·åœ¨è¿™å¸§æ˜¯å¦è¢«ä½¿ç”¨
     private bool isItemUsed;
-    //Ğ¯´øµÀ¾ßÇĞ»»¼üÔÚÕâÖ¡ÊÇ·ñ°´ÏÂ
+    //æºå¸¦é“å…·åˆ‡æ¢é”®åœ¨è¿™å¸§æ˜¯å¦æŒ‰ä¸‹
     private bool isItemSwitched;
-    //¸½½üµÄ³¡¾°µÀ¾ß
+    //é™„è¿‘çš„åœºæ™¯é“å…·
     private List<GameObject> nearbyItems;
 
     [SerializeField]
-    [Tooltip("¼üÅÌÊäÈëÀäÈ´Ê±¼ä")]
+    [Tooltip("é”®ç›˜è¾“å…¥å†·å´æ—¶é—´")]
     private float coolDownTime;
 
     // Start is called before the first frame update
@@ -28,32 +31,19 @@ public class ItemHolder : MonoBehaviour
     {
         this.itemNames = new List<string>();
         this.collectedItems = new Dictionary<string, Item>();
+        this.activeItemNames = new List<string>();
         this.itemIndex = 0;
         this.isItemUsed = false;
         this.isItemSwitched = false;
         this.nearbyItems = new List<GameObject>();
-}
+    }
 
     // Update is called once per frame
     void Update()
     {
         KeyBoardItemInvoke();
         KeyBoardItemSwitch();
-        /*if (Input.GetKey(KeyCode.M))
-        {
-            string s = "Item Names: ";
-            foreach (string name in itemNames)
-            {
-                s += (name + ", ");
-            }
-            Debug.Log(s);
-            s = "Items: ";
-            foreach (string name in collectedItems.Keys)
-            {
-                s += (name + ", ");
-            }
-            Debug.Log(s);
-        }*/
+        ActivateItemProcess();
     }
 
     void OnTriggerEnter2D(Collider2D collider)
@@ -61,17 +51,20 @@ public class ItemHolder : MonoBehaviour
         if (Item.IsItem(collider.gameObject))
         {
             this.nearbyItems.Add(collider.gameObject);
+            Debug.Log(collider.gameObject.name + "ç¢°æ’ã€‚æ£€æµ‹åˆ°" + this.nearbyItems.Count.ToString() + "ä¸ªåœºæ™¯é“å…·");
         }
-        Debug.Log(collider.gameObject.name + "Åö×²¡£¼ì²âµ½" + this.nearbyItems.Count.ToString() + "¸ö³¡¾°µÀ¾ß");
     }
 
     void OnTriggerExit2D(Collider2D collider)
     {
-        this.nearbyItems.Remove(collider.gameObject);
-        Debug.Log(collider.gameObject.name + "Àë¿ª¡£¼ì²âµ½" + this.nearbyItems.Count.ToString() + "¸ö³¡¾°µÀ¾ß");
+        if (Item.IsItem(collider.gameObject))
+        {
+            this.nearbyItems.Remove(collider.gameObject);
+            Debug.Log(collider.gameObject.name + "ç¦»å¼€ã€‚æ£€æµ‹åˆ°" + this.nearbyItems.Count.ToString() + "ä¸ªåœºæ™¯é“å…·");
+        }
     }
 
-    #region µ÷ÓÃitemIndexÖ¸ÏòµÄµÀ¾ß: K¼üÊ¹ÓÃ / µ÷ÓÃ³¡¾°µÀ¾ß£ºE¼üÊ¹ÓÃ
+    #region è°ƒç”¨itemIndexæŒ‡å‘çš„é“å…·: Ké”®ä½¿ç”¨ / è°ƒç”¨åœºæ™¯é“å…·ï¼šEé”®ä½¿ç”¨
     void KeyBoardItemInvoke()
     {
         if (!this.isItemUsed && Input.GetKey(KeyCode.K) && this.itemNames.Count > 0)
@@ -80,11 +73,11 @@ public class ItemHolder : MonoBehaviour
             string itemName = this.itemNames[this.itemIndex];
             if (this.collectedItems.ContainsKey(itemName))
             {
-                Debug.Log("Ê¹ÓÃ" + itemName + "µÀ¾ß");
+                Debug.Log("ä½¿ç”¨" + itemName + "é“å…·");
                 this.collectedItems[itemName].ItemInvoke();
             }
             Invoke("SetIsItemUsed", this.coolDownTime);
-            Debug.Log("Ê£ÓàµÀ¾ßÊıÁ¿" + collectedItems.Count);
+            Debug.Log("å‰©ä½™é“å…·æ•°é‡" + collectedItems.Count);
         }
 
         if (!this.isItemUsed && Input.GetKey(KeyCode.E) && this.nearbyItems.Count > 0)
@@ -92,7 +85,7 @@ public class ItemHolder : MonoBehaviour
             this.isItemUsed = true;
             this.nearbyItems[0].SendMessage("ItemInvoke");
             Invoke("SetIsItemUsed", this.coolDownTime);
-            Debug.Log("Ê¹ÓÃÎïÌå" + this.nearbyItems[0].name);
+            Debug.Log("ä½¿ç”¨ç‰©ä½“" + this.nearbyItems[0].name);
         }
     }
 
@@ -102,7 +95,7 @@ public class ItemHolder : MonoBehaviour
     }
     #endregion
 
-    #region µÀ¾ßÇĞ»»: J¡¢L¼üÇĞ»»×óÓÒµÀ¾ß
+    #region é“å…·åˆ‡æ¢: Jã€Lé”®åˆ‡æ¢å·¦å³é“å…·
     void KeyBoardItemSwitch()
     {
         if (!this.isItemSwitched && itemNames.Count > 0)
@@ -112,13 +105,13 @@ public class ItemHolder : MonoBehaviour
                 this.isItemSwitched = true;
                 this.SetItemIndex(this.itemNames.Count - 1);
                 Invoke("SetIsItemSwitched", this.coolDownTime);
-                Debug.Log("Ñ¡ÖĞµÚ" + this.itemIndex.ToString() + "¸öµÀ¾ß" + this.itemNames[this.itemIndex] + " µÀ¾ß×ÜÊıÎª" + this.itemNames.Count.ToString());
+                Debug.Log("é€‰ä¸­ç¬¬" + this.itemIndex.ToString() + "ä¸ªé“å…·" + this.itemNames[this.itemIndex] + " é“å…·æ€»æ•°ä¸º" + this.itemNames.Count.ToString());
             } else if (Input.GetKey(KeyCode.L))
             {
                 this.isItemSwitched = true;
                 this.SetItemIndex(1);
                 Invoke("SetIsItemSwitched", this.coolDownTime);
-                Debug.Log("Ñ¡ÖĞµÚ" + this.itemIndex.ToString() + "¸öµÀ¾ß" + this.itemNames[this.itemIndex] + " µÀ¾ß×ÜÊıÎª" + this.itemNames.Count.ToString());
+                Debug.Log("é€‰ä¸­ç¬¬" + this.itemIndex.ToString() + "ä¸ªé“å…·" + this.itemNames[this.itemIndex] + " é“å…·æ€»æ•°ä¸º" + this.itemNames.Count.ToString());
             }
         }
     }
@@ -134,28 +127,54 @@ public class ItemHolder : MonoBehaviour
     }
     #endregion
 
-    #region µÀ¾ß³ÖÓĞÕßÌí¼ÓµÀ¾ß
+    #region ä¸»åŠ¨é“å…·ï¼ˆéœ€è¦ä¸»åŠ¨éšå¸§æ›´æ–°å‚æ•°çš„é“å…·ï¼‰å¤„ç†
+    void ActivateItemProcess()
+    {
+        foreach(string itemName in this.activeItemNames)
+        {
+            this.collectedItems[itemName].Update(this.gameObject);
+        }
+    }
+
+    #endregion
+
+    #region é“å…·æŒæœ‰è€…æ·»åŠ é“å…·
     public void AddItem(Item item)
     {
         this.itemNames.Add(item.GetName());
         this.collectedItems.Add(item.GetName(), item);
         this.SetItemIndex(0);
-        Debug.Log("Ìí¼ÓµÀ¾ß" + item.GetName());
+        Debug.Log("æ·»åŠ é“å…·" + item.GetName());
+    }
+
+    public void AddActiveItem(Item item)
+    {
+        this.AddItem(item);
+        this.activeItemNames.Add(item.GetName());
     }
     #endregion
 
-    #region µÀ¾ß³ÖÓĞÕßÒÆ³ıµÀ¾ß
+    #region é“å…·æŒæœ‰è€…ç§»é™¤é“å…·
     public void RemoveItem(string name)
     {
         this.itemNames.Remove(name);
         this.collectedItems.Remove(name);
-        Debug.Log("ÒÆ³ıµÀ¾ß" + name);
+        if (this.itemNames.Count > 0)
+        {
+            this.SetItemIndex(0);
+        }
+        Debug.Log("ç§»é™¤é“å…·" + name);
     }
+
+    public void RemoveActiveItem(string name, bool isActiveItem)
+    {
+        this.RemoveItem(name);
+        this.activeItemNames.Remove(name);
+    } 
     #endregion
 
-    public bool Contains(string name)
+    public bool Contains(string itemName)
     {
-        return this.itemNames.Contains(name);
+        return this.itemNames.Contains(itemName);
     }
-
 }

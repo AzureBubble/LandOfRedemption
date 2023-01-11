@@ -1,17 +1,17 @@
-using System.Collections;
+ï»¿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 namespace Items {
 
-    //µÀ¾ß³éÏóÀà
+    //é“å…·æŠ½è±¡ç±»
     public abstract class Item
     {
-        //µÀ¾ßÃû³Æ
+        //é“å…·åç§°
         protected string name;
-        //µÀ¾ß³ÖÓĞÕß
+        //é“å…·æŒæœ‰è€…
         protected GameObject holder;
-        //µÀ¾ßµ÷ÓÃ·½·¨
+        //é“å…·è°ƒç”¨æ–¹æ³•
         public abstract void ItemInvoke();
 
         public virtual void SetName(string name)
@@ -29,6 +29,11 @@ namespace Items {
             this.holder = obj;
         }
 
+        public virtual void Update(GameObject obj)
+        {
+
+        }
+
         public static bool IsHolder(GameObject obj)
         {
             return (obj.GetComponent("ItemHolder")) ? true : false;
@@ -42,6 +47,7 @@ namespace Items {
         
     }
 
+    // åœºæ™¯é“å…·ï¼ˆä¸å¯æ‹¾å–é“å…·ï¼‰æ¥å£
     interface ISceneItem
     {
         public void ItemInvoke();

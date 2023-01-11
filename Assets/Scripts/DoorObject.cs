@@ -1,4 +1,4 @@
-using System.Collections;
+锘縰sing System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using Items;
@@ -6,12 +6,12 @@ using Items;
 public class DoorObject : MonoBehaviour
 {
     [SerializeField]
-    [Tooltip("名称")]
+    [Tooltip("鍚嶇О")]
     private string name;
     [SerializeField]
-    [Tooltip("配对钥匙名称")]
+    [Tooltip("閰嶅閽ュ寵鍚嶇О")]
     private string matchedKeyName;
-    //是否打开
+    //鏄惁鎵撳紑
     private bool isOpen;
 
     // Start is called before the first frame update
@@ -33,7 +33,7 @@ public class DoorObject : MonoBehaviour
 
     void OnCollisionEnter2D(Collision2D collision)
     {
-        Debug.Log(this.name + "触发碰撞");
+        Debug.Log(this.name + "瑙﹀彂纰版挒");
         if (Item.IsHolder(collision.collider.gameObject))
         {
             ItemHolder visitor = (ItemHolder) collision.collider.gameObject.GetComponent("ItemHolder");
