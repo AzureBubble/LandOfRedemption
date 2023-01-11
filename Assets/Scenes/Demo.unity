@@ -414,7 +414,7 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 8095947265537644599, guid: 82139f5fb84f14f498a9746d48c45adc, type: 3}
   m_PrefabInstance: {fileID: 8095947264649975121}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &1047105176
+--- !u!114 &1047105182
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -429,13 +429,13 @@ MonoBehaviour:
   moveSpeed: 10
   kickBoardMoveSpeed: 20
   jumpForce: 5
-  jumpCount: 2
+  jumpCount: 1
   isJump: 0
   minJumpTime: 0.2
   maxJumpTime: 0.5
   currentJumpTime: 0.5
-  jumpUpGraivity: 3
-  fallDownGraivity: 6
+  jumpUpGraivity: 0.5
+  fallDownGraivity: 1
   isGround: 1
   checkRadius: 0.5
   layer:
