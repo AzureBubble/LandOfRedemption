@@ -7,7 +7,8 @@ public class PlayerMovement : MonoBehaviour
 {
 
     private Rigidbody2D rb; // Player 的刚体
-    private float inputX; // 获取玩家的 X 轴输入
+    public float inputX; // 获取玩家的 X 轴输入
+    public float inputY;
     //private Animator anim; // Player 动画控制器
 
 
@@ -17,7 +18,7 @@ public class PlayerMovement : MonoBehaviour
     public float moveSpeed; // 移动速度
     [Tooltip("Player 跳跃力")]
     [SerializeField]
-    private float jumpForce; // 跳跃力
+    public float jumpForce; // 跳跃力
     [Tooltip("Player 可跳跃次数")]
     [SerializeField]
     private float jumpCount; // 可跳跃次数
@@ -35,21 +36,28 @@ public class PlayerMovement : MonoBehaviour
     private float currentJumpTime = 0.5f; // 跳跃时间
     [Tooltip("Player 跳跃重力")]
     [SerializeField]
-    private float jumpUpGraivity = 3; // 跳跃重力
+    public float jumpUpGraivity = 3; // 跳跃重力
     [Tooltip("Player 下落重力")]
     [SerializeField]
-    private float fallDownGraivity = 6; // 下落重力
+    public float fallDownGraivity = 6; // 下落重力
     [Tooltip("Player 落地检测")]
     [SerializeField]
-    private bool isGround = true; // 落地检测
-    [Tooltip("Player 落地检测半径")]
+    public bool isGround = true; // 落地检测
+    /*[Tooltip("Player 落地检测半径")]
     [Range(0, 1.0f)]
     [SerializeField]
-    private float checkRadius = .5f; // 落地检测半径
+    private float checkRadius = .5f; // 落地检测半径*/
     [Tooltip("Player 检测地面的 Layer")]
     [SerializeField]
     private LayerMask layer; // 检测地面的 Layer
-
+    [Tooltip("获取player脚的位置")]
+    [SerializeField]
+    [Range(0, 1f)]
+    private float footOffset = 0.3f;
+    [Tooltip("游戏人物到地面的距离")]
+    [SerializeField]
+    [Range(0, 1f)]
+    private float groundDistance = 0.6f;
 
 
     void Start()
@@ -66,11 +74,13 @@ public class PlayerMovement : MonoBehaviour
         currentJumpTime += Time.deltaTime;
         // 获取玩家的 X 轴输入
         inputX = Input.GetAxisRaw("Horizontal");
+        inputY = Input.GetAxisRaw("Vertical");
         Jump();
     }
 
     void FixedUpdate()
     {
+        GroundCheck();
         ChangeGraivity();
         Flip();
         Move();
@@ -107,15 +117,38 @@ public class PlayerMovement : MonoBehaviour
     }
     #endregion
 
-    #region 判断跳跃状态
+    #region 检测地面
+    void GroundCheck()
+    {
+        RaycastHit2D leftCheck = Raycast(new Vector2(-footOffset + 0.1f, -0.2f), Vector2.down, groundDistance, layer);
+        RaycastHit2D rightCheck = Raycast(new Vector2(footOffset + 0.05f, -0.2f), Vector2.down, groundDistance, layer);
+        if (leftCheck || rightCheck)
+        {
+            isGround = true;
+        }
+        else
+        {
+            isGround = false;
+        }
+    }
+    #endregion
 
+    #region 获取人物较低发出的射线碰撞图层
+    RaycastHit2D Raycast(Vector2 offset, Vector2 direction, float length, LayerMask layer)
+    {
+        Vector2 pos = transform.position;
+        RaycastHit2D hit = Physics2D.Raycast(pos + offset, direction, length, layer);
+        Color color = hit ? Color.red : Color.green;
+        Debug.DrawRay(pos + offset, direction * length, color);
+        return hit;
+    }
     #endregion
 
     #region Player 跳跃
     void Jump()
     {
         //检测 Player 是否落地
-        isGround = Physics2D.OverlapCircle(transform.position, checkRadius, layer);
+        //isGround = Physics2D.OverlapCircle(transform.position, checkRadius, layer);
         if (Input.GetKeyDown(KeyCode.Space) && isGround == true)
         {
             rb.velocity = new Vector2(rb.velocity.x, jumpForce);
@@ -136,7 +169,7 @@ public class PlayerMovement : MonoBehaviour
     }
     #endregion
 
-    #region 画出检测图形
+    /*#region 画出检测图形
     private void OnDrawGizmos()
     {
         // 画笔颜色
@@ -144,5 +177,5 @@ public class PlayerMovement : MonoBehaviour
         // 画出地面检测范围圆(圆心，半径)
         Gizmos.DrawWireSphere(transform.position, checkRadius);
     }
-    #endregion
+    #endregion*/
 }
