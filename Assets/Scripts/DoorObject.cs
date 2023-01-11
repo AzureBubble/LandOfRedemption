@@ -7,7 +7,11 @@ public class DoorObject : MonoBehaviour
 {
     [SerializeField]
     [Tooltip("名称")]
+<<<<<<< HEAD
     private string nameDoor;
+=======
+    private string name;
+>>>>>>> main
     [SerializeField]
     [Tooltip("配对钥匙名称")]
     private string matchedKeyName;

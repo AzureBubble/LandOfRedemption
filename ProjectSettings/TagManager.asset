@@ -3,12 +3,16 @@
 --- !u!78 &1
 TagManager:
   serializedVersion: 2
+<<<<<<< HEAD
 <<<<<<< Updated upstream
   tags:
   - ground
 =======
   tags: []
 >>>>>>> Stashed changes
+=======
+
+>>>>>>> main
   layers:
   - Default
   - TransparentFX
@@ -20,11 +24,15 @@ TagManager:
   - Ground
   - 
   - 
+<<<<<<< HEAD
   - 
   - 
   - 
   - 
 <<<<<<< Updated upstream
+=======
+
+>>>>>>> main
   - Ground
   - Enemy
   - Player
@@ -48,11 +56,15 @@ TagManager:
   - 
   - 
   - 
+<<<<<<< HEAD
 <<<<<<< Updated upstream
   - 
   - 
 =======
 >>>>>>> Stashed changes
+=======
+
+>>>>>>> main
   m_SortingLayers:
   - name: Default
     uniqueID: 0
