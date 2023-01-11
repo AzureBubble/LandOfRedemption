@@ -1,10 +1,9 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Items;
 
-namespace ClearSky
-{
-    public class PlayController : MonoBehaviour
+    public class PlayerMovement : MonoBehaviour
     {
         private Rigidbody2D rb;
         private float inputX, inputY;
@@ -206,5 +205,3 @@ namespace ClearSky
             }
         }
     }
-
-}

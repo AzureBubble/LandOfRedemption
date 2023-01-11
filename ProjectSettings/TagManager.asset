@@ -3,8 +3,12 @@
 --- !u!78 &1
 TagManager:
   serializedVersion: 2
+<<<<<<< Updated upstream
   tags:
   - ground
+=======
+  tags: []
+>>>>>>> Stashed changes
   layers:
   - Default
   - TransparentFX
@@ -13,11 +17,19 @@ TagManager:
   - Water
   - UI
   - 
+  - Ground
   - 
   - 
+  - 
+  - 
+  - 
+  - 
+<<<<<<< Updated upstream
   - Ground
   - Enemy
   - Player
+=======
+>>>>>>> Stashed changes
   - 
   - 
   - 
@@ -36,8 +48,11 @@ TagManager:
   - 
   - 
   - 
+<<<<<<< Updated upstream
   - 
   - 
+=======
+>>>>>>> Stashed changes
   m_SortingLayers:
   - name: Default
     uniqueID: 0
