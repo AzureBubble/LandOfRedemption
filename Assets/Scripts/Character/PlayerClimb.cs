@@ -25,11 +25,11 @@ public class PlayerClimb : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.W) && canClimb)
         {
-            rb.velocity = new Vector2(rb.velocity.x, climbSpeed);
+            rb.velocity = new Vector2(rb.velocity.x, climbSpeed * playerMovement.inputY);
         }
         if (Input.GetKeyDown(KeyCode.S) && canClimb)
         {
-            rb.velocity = new Vector2(rb.velocity.x, -climbSpeed);
+            rb.velocity = new Vector2(rb.velocity.x, -climbSpeed * playerMovement.inputY);
         }
     }
 
