@@ -50,14 +50,11 @@ public class DialogSystem : MonoBehaviour
     {
         if (Input.GetButtonDown("Fire1") && index == columnNum)  // index 一共有多少行 关掉对话框
         {
-<<<<<<< Updated upstream
             Debug.Log("关闭");
             TalkUI.SetActive(false);
             index = 0;
-=======
             index = 0;
             TalkUI.SetActive(false);
->>>>>>> Stashed changes
             return;
         }
 

@@ -1,14 +1,14 @@
-using System.Collections;
+ï»¿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class DialogUIControl : MonoBehaviour
 {
-    [Header("¶Ô»°UI")]
-    [Tooltip("¶Ô»°¿ò°´Å¥")]
+    [Header("å¯¹è¯UI")]
+    [Tooltip("å¯¹è¯æ¡†æŒ‰é’®")]
     [SerializeField]
     public GameObject Button_dialogue;
-    [Tooltip("¶Ô»°¿òÏÔÊ¾")]
+    [Tooltip("å¯¹è¯æ¡†æ˜¾ç¤º")]
     [SerializeField]
     public GameObject TalkUI;
     private void OnTriggerEnter2D(Collider2D collision)
@@ -34,11 +34,10 @@ public class DialogUIControl : MonoBehaviour
 
     private void Update()
     {
-<<<<<<< Updated upstream
         if(Button_dialogue.activeSelf && Input.GetKeyDown(KeyCode.R))
-=======
+
         if(Button_dialogue.activeSelf && Input.GetKeyDown(KeyCode.E))
->>>>>>> Stashed changes
+
         {
             TalkUI.SetActive(true);
         }
