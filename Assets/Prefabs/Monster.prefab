@@ -16,7 +16,7 @@ GameObject:
   - component: {fileID: 9088164670154808609}
   m_Layer: 0
   m_Name: Monster
-  m_TagString: Monster
+  m_TagString: monster
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -30,7 +30,7 @@ Transform:
   m_GameObject: {fileID: 9088164670154808622}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -24.38, y: 3.56, z: 0}
-  m_LocalScale: {x: 10.437109, y: 9.53256, z: 1}
+  m_LocalScale: {x: 15.880061, y: 14.503791, z: 1.5215}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
@@ -167,9 +167,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b693a39c2bda0f04491c6fce05e4bc1c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  moveSpeed: 2
+  moveSpeed: 3
   changeDirectionTime: 2
   isChasing: 1
-  target: {fileID: 4430200942589606740, guid: 63f886fc61ee5634f828a8ce01e2ba3c, type: 3}
-  rangDistance: 1
-  chaseSpeed: 1.5
+  target: {fileID: 0}
+  rangDistance: 3
+  chaseSpeed: 2
+  playerAnim: {fileID: 0}

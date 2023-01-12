@@ -4,15 +4,21 @@ using UnityEngine;
 
 public class PlayerClimb : MonoBehaviour
 {
+    /*public enum States
+    {
+        NotClimb,Climb
+    }*/
 
     private Rigidbody2D rb;
-    public float climbSpeed = 5;
+    private PlayerMovement playerMovement;
+    private float climbSpeed = 5;
 
     public bool canClimb = false;
 
     private void Start()
     {
         rb = GetComponent<Rigidbody2D>();
+        playerMovement = GetComponent<PlayerMovement>();
     }
 
     private void Update()

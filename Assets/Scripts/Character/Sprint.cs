@@ -1,4 +1,3 @@
-using ClearSky;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -63,7 +62,7 @@ public class Sprint : MonoBehaviour
             if (sprintLeftTime > 0)
             {
                 rb.gravityScale = 0;
-                GetComponent<PlayController>().enabled = false;
+                GetComponent<PlayerMovement>().enabled = false;
                 rb.velocity = Vector2.right * sprintSpeed * transform.localScale.x;
                 sprintLeftTime -= Time.deltaTime;
                 ShadowPlool.instance.GetFromPool();
@@ -72,7 +71,7 @@ public class Sprint : MonoBehaviour
             {
                 isSprint = false;
                 rb.gravityScale = currentGrivity;
-                GetComponent<PlayController>().enabled = true;
+                GetComponent<PlayerMovement>().enabled = true;
             }
         }
     }

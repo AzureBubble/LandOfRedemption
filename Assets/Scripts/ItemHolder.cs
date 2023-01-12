@@ -45,6 +45,7 @@ public class ItemHolder : MonoBehaviour
         this.isItemSwitched = false;
         this.nearbyItems = new List<GameObject>();
         this.ui = GameObject.Find(this.UserInterfaceObject);
+        collectedItems.Clear();
     }
 
     // Update is called once per frame

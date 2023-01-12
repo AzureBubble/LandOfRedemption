@@ -32,19 +32,19 @@ namespace ClearSky
         [Tooltip("Player 跳跃")]
         [SerializeField]
         private bool isJump = false;                  // 是否跳跃
-        
+
         [Tooltip("Player 最小跳跃高度")]
         [SerializeField]
         private float minJumpTime = 0.2f;     // 最小跳跃高度
-        
+
         [Tooltip("Player 最大跳跃高度")]
         [SerializeField]
         private float maxJumpTime = 0.5f;     // 最大跳跃高度
-        
-        [Tooltip("Player 跳跃时间")]
-        [SerializeField]
-        private float currentJumpTime = 0.5f; // 跳跃时间
-        
+
+
+
+        private float currentShiftTime = -0.1f;
+
         [Tooltip("Player 跳跃重力")]
         [SerializeField]
         private float jumpUpGraivity = 0.5f;     // 跳跃重力
@@ -61,7 +61,7 @@ namespace ClearSky
         [Range(0, 1.0f)]
         [SerializeField]
         private float checkRadius = .5f;      // 落地检测半径
-    
+
         [Tooltip("Player 检测地面的 Layer")]
         [SerializeField]
         private LayerMask layer;             // 检测地面的 Layer
@@ -75,14 +75,14 @@ namespace ClearSky
         [SerializeField]
         private bool isDie = false;
 
-        [Tooltip("Player 是否获得护盾")]
+        [Tooltip("Player 是否处于无敌时间")]
         [SerializeField]
-        private bool isActivateSheild = false;
+        public bool isActivateSheild = false;
 
-        private void FixedUpdate()
-        {
-            
-        }
+        public float startTime;
+        [Tooltip("Player 冲刺冷却时间")]
+        public float coolTime = 2f;
+
 
         void Start()
         {
@@ -94,32 +94,33 @@ namespace ClearSky
 
         private void Update()
         {
+            /*if (isDie)
+            {
+                return;
+            }*/
             Restart();
             inputX = Input.GetAxisRaw("Horizontal");
             inputY = Input.GetAxisRaw("Vertical");
-            currentJumpTime += Time.deltaTime;
+            currentShiftTime += Time.deltaTime;
             ChangeGraivity();
-            if (!isDie)
-            {
-                if (!isActivateSheild)
-                    Die();
-                Hurt();
-                Attack();
-                Jump();
-                KickBoard();
-                Run();
-            }
+            Hurt();
+            Attack();
+            Jump();
+            Run();
+            KickBoard();
+            if (isActivateSheild)
+                return;
         }
         private void OnTriggerEnter2D(Collider2D other)
         {
-            
+
             anim.SetBool("isJump", false);
-            if(other.tag == "buttom")
+            if (other.tag == "buttom")
             {
                 ;
             }
             else
-            if(other.tag == "black")
+            if (other.tag == "black")
             {
                 if (Input.GetKeyDown(KeyCode.E))
                 {
@@ -127,9 +128,9 @@ namespace ClearSky
                 }
             }
             else
-            if(other.tag == "strongbox")
+            if (other.tag == "strongbox")
             {
-                if(Input.GetKeyDown(KeyCode.E))
+                if (Input.GetKeyDown(KeyCode.E))
                 {
                     ;
                 }
@@ -184,10 +185,15 @@ namespace ClearSky
         {
             if (Input.GetKeyDown(KeyCode.LeftShift))
             {
-                Vector2 runVelocity = new Vector2(kickBoardMoveSpeed * transform.localScale.x, rb.velocity.y);
-                rb.velocity = runVelocity;
+                if (currentShiftTime > startTime + coolTime)
+                {
+                    startTime = Time.time;
+                    Vector2 runVelocity = new Vector2(kickBoardMoveSpeed * transform.localScale.x, rb.velocity.y);
+                    rb.velocity = runVelocity;
+                }
             }
         }
+
 
         void Run()
         {
@@ -195,12 +201,12 @@ namespace ClearSky
             {
                 Vector3 moveVelocity = Vector3.zero;
                 anim.SetBool("isRun", false);
-                if((int)inputX != 0)
+                if ((int)inputX != 0)
                 {
                     transform.localScale = new Vector3(inputX, 1, 1);
                     moveVelocity = new Vector3(inputX, 0, 0);
                     if (!anim.GetBool("isJump"))
-                    anim.SetBool("isRun", true);
+                        anim.SetBool("isRun", true);
                     transform.position += moveVelocity * moveSpeed * Time.deltaTime;
                 }
             }
@@ -223,15 +229,15 @@ namespace ClearSky
         void Jump()
         {
             isGround = Physics2D.OverlapCircle(transform.position, checkRadius, layer);
-            if(isGround)
+            if (isGround)
                 jumpCount = 1;
-            if(Input.GetKeyDown(KeyCode.Space) && jumpCount > 0)
+            if (Input.GetKeyDown(KeyCode.Space) && jumpCount > 0)
             {
                 isJump = true;
                 anim.SetBool("isJump", true);
                 --jumpCount;
             }
-            if(!isJump)
+            if (!isJump)
                 return;
             Vector2 jumpVelocity = new Vector2(0, jumpForce);
             rb.AddForce(jumpVelocity, ForceMode2D.Impulse);
@@ -257,7 +263,7 @@ namespace ClearSky
         }
         void Die()
         {
-            
+
             if (isDie)
             {
                 isKickboard = false;

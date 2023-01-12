@@ -15,12 +15,12 @@ public class SceneLoad : MonoBehaviour
     float fadeTime = 1f;
 
     // 在这里设置 要转到场景的名字
-    const string GAMEPLAY = "Level01";
+    const int GAMEPLAY = 0;
     const string GoBack = "TestDemo";
 
     Color color;
 
-    IEnumerator LoadCoroutine(string newScene)
+    IEnumerator LoadCoroutine(int newScene)
     {
         // 异步加载 解决画面卡顿问题
         var loadingOperation = SceneManager.LoadSceneAsync(newScene);
@@ -56,7 +56,7 @@ public class SceneLoad : MonoBehaviour
     {
         StopAllCoroutines();
 
-        StartCoroutine(LoadCoroutine(GAMEPLAY));
+        StartCoroutine(LoadCoroutine(SceneManager.GetActiveScene().buildIndex + 1));
 
     }
 
@@ -64,7 +64,12 @@ public class SceneLoad : MonoBehaviour
     {
         StopAllCoroutines();
 
-        StartCoroutine(LoadCoroutine(GoBack));
+        StartCoroutine(LoadCoroutine(SceneManager.GetActiveScene().buildIndex - 1));
+    }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        Invoke("NextScene", 1f);
     }
 
 }

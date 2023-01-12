@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class Monster : MonoBehaviour
 {
@@ -32,6 +33,8 @@ public class Monster : MonoBehaviour
     [SerializeField]
     public float chaseSpeed = 1.5f;
 
+    public Animator playerAnim;
+
 
 
     void Start()
@@ -59,7 +62,7 @@ public class Monster : MonoBehaviour
 
             if (transform.position.y != y)
             {
-                transform.position = Vector3.MoveTowards(transform.position, new Vector3(transform.position.x, y, 0), 2 * Time.deltaTime);
+               //transform.position = Vector3.MoveTowards(transform.position, new Vector3(transform.position.x, y, 0), 2 * Time.deltaTime);
             }
             ChangeMoving();
         }
@@ -70,12 +73,13 @@ public class Monster : MonoBehaviour
     private void OnTriggerEnter2D(Collider2D collision)
     {
 
-        /*if (collision.gameObject.tag == "Player")
+        if (collision.gameObject.tag == "Player")
         {
             // 在这里调用 主角 脚本 的 主角死亡 代码
+            playerAnim.SetTrigger("die");
             Debug.Log("主角完蛋");
-
-        }*/
+            Invoke("LoadScene",1f);
+        }
 
         if (collision.gameObject.tag == "Monster")
         {
@@ -85,6 +89,11 @@ public class Monster : MonoBehaviour
 
     }
     #endregion
+
+    void LoadScene()
+    {
+        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+    }
 
     #region 改变移动方向
     private void ChangeMoving()
@@ -140,4 +149,5 @@ public class Monster : MonoBehaviour
         }
     }
     #endregion
+
 }
