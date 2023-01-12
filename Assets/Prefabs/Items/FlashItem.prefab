@@ -11,7 +11,6 @@ GameObject:
   - component: {fileID: 8360073249641871345}
   - component: {fileID: 8360073249641871358}
   - component: {fileID: 8360073249641871344}
-  - component: {fileID: 8360073249641871359}
   m_Layer: 0
   m_Name: FlashItem
   m_TagString: Untagged
@@ -112,18 +111,3 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 3.08, y: 3.08}
   m_EdgeRadius: 0
---- !u!114 &8360073249641871359
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8360073249641871356}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: cc7f163d77c0abf4686d6dd3a7523dc7, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  itemName: Flash Item
-  coolDownTime: 3
-  flashDistance: 3

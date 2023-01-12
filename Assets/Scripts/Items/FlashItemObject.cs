@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Threading;
 using System.Collections;
 using System.Collections.Generic;
@@ -41,7 +41,7 @@ public class FlashItemObject : MonoBehaviour
 
     void OnTriggerEnter2D(Collider2D collider)
     {
-        Debug.Log(this.itemName + "道具触发碰撞");
+        Debug.Log(this.itemName + "道具出发");
         if (Item.IsHolder(collider.gameObject))
         {
             this.item.SetHolder(collider.gameObject);
@@ -85,7 +85,7 @@ namespace Items
                     Debug.Log(this.name + "冷却时间结束");
                 } catch (Exception)
                 {
-                    Debug.Log(this.name + "运行抛出异常，将重新运行");
+                    Debug.Log(this.name + "运行抛出异常。将重新运行");
                     Thread.Sleep(100);
                     this.CoolDown();
                 }

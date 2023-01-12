@@ -26,7 +26,7 @@ public class ItemHolder : MonoBehaviour
 
     [SerializeField]
     [Tooltip("键盘输入冷却时间")]
-    private float coolDownTime;
+    private float coolDownTime = 0.2f;
     [SerializeField]
     [Tooltip("护盾效果预制体")]
     private GameObject sheildEffectPrefab;

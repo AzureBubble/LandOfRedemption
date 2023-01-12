@@ -17,9 +17,9 @@ namespace ClearSky
         [SerializeField]
         public float moveSpeed = 10.0f;               // 移动速度
 
-        [Tooltip("KickBoard 移动速度")]
+        [Tooltip("Player 冲刺速度")]
         [SerializeField]
-        public float kickBoardMoveSpeed = 20.0f;      // 坐骑移动速度
+        public float kickBoardMoveSpeed = 50.0f;      // 坐骑移动速度
 
         [Tooltip("Player 跳跃力")]
         [SerializeField]
@@ -71,8 +71,12 @@ namespace ClearSky
         Vector3 movement;
         private int direction = 1;
         private bool isKickboard = false;
+        [Tooltip("Player 死亡")]
+        [SerializeField]
         private bool isDie = false;
 
+        [Tooltip("Player 是否获得护盾")]
+        [SerializeField]
         private bool isActivateSheild = false;
 
         void Start()
@@ -145,14 +149,18 @@ namespace ClearSky
             Debug.Log(transform.position.x);
             transform.position += moveVelocity;
             Debug.Log(transform.position.x);
-            Thread.Sleep(100);
         }
 
         public void ActivateSheild(float time)
         {
             isActivateSheild = true;
-            Thread.Sleep(3000);
+            Debug.Log("成功");
+            this.Invoke("close", time);
+        }
+        void close()
+        {
             isActivateSheild = false;
+            Debug.Log("成功取消");
         }
         public void ToPosition(Vector3 vector)
         {
@@ -171,15 +179,10 @@ namespace ClearSky
         }
         void KickBoard()
         {
-            if (Input.GetKeyDown(KeyCode.Alpha4) && isKickboard)
+            if (Input.GetKeyDown(KeyCode.LeftShift))
             {
-                isKickboard = false;
-                anim.SetBool("isKickBoard", false);
-            }
-            else if (Input.GetKeyDown(KeyCode.Alpha4) && !isKickboard )
-            {
-                isKickboard = true;
-                anim.SetBool("isKickBoard", true);
+                Vector2 runVelocity = new Vector2(kickBoardMoveSpeed * transform.localScale.x, rb.velocity.y);
+                rb.velocity = runVelocity;
             }
         }
 
@@ -244,7 +247,7 @@ namespace ClearSky
         }
         void Die()
         {
-            if (Input.GetKeyDown(KeyCode.Alpha3))
+            if(isDie)
             {
                 isKickboard = false;
                 anim.SetBool("isKickBoard", false);
