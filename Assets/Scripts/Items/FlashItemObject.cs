@@ -20,7 +20,7 @@ public class FlashItemObject : MonoBehaviour
 
     [SerializeField]
     [Tooltip("…¡œ÷æ‡¿Î")]
-    private float flashDistance;
+    private float flashDistance = 3.0f;
 
     // Start is called before the first frame update
     void Start()
