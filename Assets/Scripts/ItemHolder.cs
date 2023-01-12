@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Threading;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -25,6 +26,10 @@ public class ItemHolder : MonoBehaviour
     [SerializeField]
     [Tooltip("键盘输入冷却时间")]
     private float coolDownTime;
+    [SerializeField]
+    [Tooltip("护盾效果预制体")]
+    private GameObject sheildEffectPrefab;
+    private GameObject sheildEffect;
 
     // Start is called before the first frame update
     void Start()
@@ -179,4 +184,16 @@ public class ItemHolder : MonoBehaviour
     {
         return this.itemNames.Contains(itemName);
     }
+
+    public void SheildEffectOn(float time)
+    {
+        this.sheildEffect = Instantiate(this.sheildEffectPrefab, this.gameObject.transform);
+        Invoke("SheildEffectOff", time);
+    }
+
+    public void SheildEffectOff()
+    {
+        Destroy(this.sheildEffect);
+    }
+
 }
