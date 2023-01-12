@@ -7,7 +7,7 @@ public class DoorObject : MonoBehaviour
 {
     [SerializeField]
     [Tooltip("名称")]
-    private string name;
+    private string doorName;
     [SerializeField]
     [Tooltip("配对钥匙名称")]
     private string matchedKeyName;
@@ -33,7 +33,7 @@ public class DoorObject : MonoBehaviour
 
     void OnCollisionEnter2D(Collision2D collision)
     {
-        Debug.Log(this.name + "触发碰撞");
+        Debug.Log(this.doorName + "触发碰撞");
         if (Item.IsHolder(collision.collider.gameObject))
         {
             ItemHolder visitor = (ItemHolder) collision.collider.gameObject.GetComponent("ItemHolder");

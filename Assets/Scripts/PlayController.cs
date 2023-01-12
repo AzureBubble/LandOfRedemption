@@ -1,10 +1,13 @@
+using System;
+using System.Threading;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Interface;
 
 namespace ClearSky
 {
-    public class PlayController : MonoBehaviour
+    public class PlayController : MonoBehaviour, PlayerInterfaces
     {
         private Rigidbody2D rb;
         private float inputX, inputY;
@@ -70,6 +73,8 @@ namespace ClearSky
         private bool isKickboard = false;
         private bool isDie = false;
 
+        private bool isActivateSheild = false;
+
         void Start()
         {
             // 获取角色刚体组件
@@ -87,8 +92,8 @@ namespace ClearSky
             ChangeGraivity();
             if (!isDie)
             {
-                
-                Die();
+                if(!isActivateSheild)
+                    Die();
                 Hurt();
                 Attack();
                 Jump();
@@ -100,6 +105,58 @@ namespace ClearSky
         private void OnTriggerEnter2D(Collider2D other)
         {
             anim.SetBool("isJump", false);
+            if(other.tag == "buttom")
+            {
+                ;
+            }
+            else
+            if(other.tag == "black")
+            {
+                if (Input.GetKeyDown(KeyCode.E))
+                {
+                    ;
+                }
+            }
+            else
+            if(other.tag == "strongbox")
+            {
+                if(Input.GetKeyDown(KeyCode.E))
+                {
+                    ;
+                }
+            }
+            if(other.tag == "magma")
+            {
+                isDie = true;
+            }
+            if(other.tag == "monster")
+            {
+                isDie = true;
+            }
+        }
+
+
+
+        public void ActivateFlash(float distance)
+        {
+            Vector3 moveVelocity = Vector3.zero;
+            moveVelocity = new Vector3(distance * transform.localScale.x, 0, 0);
+            Debug.Log(moveVelocity.x);
+            Debug.Log(transform.position.x);
+            transform.position += moveVelocity;
+            Debug.Log(transform.position.x);
+            Thread.Sleep(100);
+        }
+
+        public void ActivateSheild(float time)
+        {
+            isActivateSheild = true;
+            Thread.Sleep(3000);
+            isActivateSheild = false;
+        }
+        public void ToPosition(Vector3 vector)
+        {
+            transform.position = vector;
         }
         void ChangeGraivity()
         {
