@@ -13,7 +13,7 @@ namespace Interfaces
         public void ToPosition(Vector3 vector);
 
         //影子位置
-        public void ShadowPosition(Vector3 vector);
+        //public void ShadowPosition(Vector3 vector);
 
         //将人物根据朝向闪现distance个单位
         public void ActivateFlash(float distance);

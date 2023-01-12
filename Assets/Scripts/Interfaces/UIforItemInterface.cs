@@ -30,10 +30,16 @@ namespace Interfaces
         //输入密码清空
         public void InputClear();
 
+        //道具添加时的UI展示，name：道具名称
+        public void AddItem(string name);
+
         //道具移除时的UI展示，name：道具名称
         public void RemoveItem(string name);
 
         //展示道具时的UI展示，name：道具名称
         public void ShowItem(string name);
+
+        //使用道具UI展示
+        public void UseItem();
     }
 }

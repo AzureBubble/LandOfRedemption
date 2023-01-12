@@ -19,6 +19,9 @@ public class SafeBoxItemObject : MonoBehaviour, ISceneItem
     [SerializeField]
     [Tooltip("密码")]
     private string password;
+    [SerializeField]
+    [Tooltip("UI名称")]
+    private string UserInterfaceObject = "UserInterface";
 
     private SafeBoxItem item;
     private bool isUsing;
@@ -26,11 +29,14 @@ public class SafeBoxItemObject : MonoBehaviour, ISceneItem
     private bool isPressed;
     private Dictionary<KeyCode, char> keyToNumMaps;
     private StringBuilder inputChars;
+    private GameObject ui;
 
     // Start is called before the first frame update
     void Start()
     {
-        this.item = new SafeBoxItem(this.itemName);
+        this.ui = GameObject.Find(this.UserInterfaceObject);
+        Debug.Log(ui.name);
+        this.item = new SafeBoxItem(this.itemName, this.ui);
         this.item.SetHolder(this.gameObject);
         this.isUsing = false;
         this.isOpen = false;
@@ -59,7 +65,6 @@ public class SafeBoxItemObject : MonoBehaviour, ISceneItem
             {KeyCode.Keypad9, '9' }
         };
         this.inputChars = new StringBuilder("");
-        //
     }
 
     // Update is called once per frame
@@ -84,6 +89,11 @@ public class SafeBoxItemObject : MonoBehaviour, ISceneItem
                 {
                     this.isPressed = true;
                     this.inputChars.Append(this.keyToNumMaps[e.keyCode]);
+
+                    string methodName = "InputPassword";
+                    Debug.Log("使用" + this.name + "，向" + ui.name + "发送接口请求" + methodName);
+                    this.ui.SendMessage(methodName, this.keyToNumMaps[e.keyCode]);
+
                     Debug.Log(this.inputChars.ToString());
                     Invoke("SetIsPressed", this.coolDownTime);
                 }
@@ -94,12 +104,16 @@ public class SafeBoxItemObject : MonoBehaviour, ISceneItem
                 //Invoke("SetIsOpen", this.coolDownTime);
                 this.SetIsOpen();
                 Debug.Log("保险箱打开");
+                this.ItemInvoke();
+
             }
 
             if (this.inputChars.Length >= this.password.Length)
             {
                 this.inputChars.Clear();
-                Debug.Log("清除输入");
+                string methodName = "InputClear";
+                Debug.Log("使用" + this.name + "，向" + ui.name + "发送接口请求" + methodName);
+                this.ui.SendMessage(methodName);
             }
         }
         else
@@ -113,7 +127,7 @@ public class SafeBoxItemObject : MonoBehaviour, ISceneItem
     {
         if (Item.IsHolder(collider.gameObject))
         {
-            this.item.ItemInvoke();
+            this.item.OutRangeDetect();
         }
     }
 
@@ -144,9 +158,12 @@ namespace Items
     public class SafeBoxItem : Item
     {
         private bool isUsing;
-        public SafeBoxItem(string name)
+        private GameObject ui;
+
+        public SafeBoxItem(string name, GameObject ui)
         {
             this.name = name;
+            this.ui = ui;
             this.isUsing = false;
         }
 
@@ -154,16 +171,26 @@ namespace Items
         {
             if (!this.isUsing)
             {
-                Debug.Log("使用" + this.name);
-                //
+                string methodName = "ShowPasswordUI";
+                Debug.Log("使用" + this.name + "，向" + ui.name + "发送接口请求" + methodName);
+                this.ui.SendMessage(methodName);
             }
             else
             {
-                Debug.Log("取消" + this.name);
-                //
+                string methodName = "HidePasswordUI";
+                Debug.Log("退出使用" + this.name + "，向" + ui.name + "发送接口请求" + methodName);
+                this.ui.SendMessage(methodName);
             }
             this.isUsing = !this.isUsing;
             this.holder.SendMessage("SetIsUsing", this.isUsing);
+        }
+
+        public void OutRangeDetect()
+        {
+            if (this.isUsing)
+            {
+                this.ItemInvoke();
+            }
         }
     }
 }
