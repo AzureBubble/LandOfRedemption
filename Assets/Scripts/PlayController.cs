@@ -129,6 +129,10 @@ namespace ClearSky
             {
                 isDie = true;
             }
+            if(other.tag == "monster")
+            {
+                isDie = true;
+            }
         }
 
 
@@ -137,7 +141,11 @@ namespace ClearSky
         {
             Vector3 moveVelocity = Vector3.zero;
             moveVelocity = new Vector3(distance * transform.localScale.x, 0, 0);
+            Debug.Log(moveVelocity.x);
+            Debug.Log(transform.position.x);
             transform.position += moveVelocity;
+            Debug.Log(transform.position.x);
+            Thread.Sleep(100);
         }
 
         public void ActivateSheild(float time)

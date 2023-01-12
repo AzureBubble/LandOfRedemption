@@ -7,7 +7,7 @@ AnimationClip:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: Idle
-  serializedVersion: 6
+  serializedVersion: 7
   m_Legacy: 0
   m_Compressed: 0
   m_UseHighQualityCurve: 1
@@ -290,7 +290,7 @@ AnimationClip:
       m_Curve:
       - serializedVersion: 3
         time: 0
-        value: {x: -0.03166723, y: 1.5905919, z: 0}
+        value: {x: -0.316, y: 1.5906, z: 0}
         inSlope: {x: 0, y: 0, z: 0}
         outSlope: {x: 0, y: 0, z: 0}
         tangentMode: 0
@@ -300,8 +300,8 @@ AnimationClip:
       - serializedVersion: 3
         time: 0.5
         value: {x: -0.031667233, y: 1.5477327, z: 0}
-        inSlope: {x: 0, y: 0, z: 0}
-        outSlope: {x: 0, y: 0, z: 0}
+        inSlope: {x: 0.00000003389511, y: 0, z: 0}
+        outSlope: {x: 0.00000003389511, y: 0, z: 0}
         tangentMode: 0
         weightedMode: 0
         inWeight: {x: 0.33333334, y: 0.33333334, z: 0.33333334}
@@ -549,7 +549,7 @@ AnimationClip:
       m_Curve:
       - serializedVersion: 3
         time: 0
-        value: -0.03166723
+        value: -0.316
         inSlope: 0
         outSlope: 0
         tangentMode: 136
@@ -559,8 +559,8 @@ AnimationClip:
       - serializedVersion: 3
         time: 0.5
         value: -0.031667233
-        inSlope: 0
-        outSlope: 0
+        inSlope: 0.00000003389511
+        outSlope: 0.00000003389511
         tangentMode: 136
         weightedMode: 0
         inWeight: 0.33333334
@@ -586,7 +586,7 @@ AnimationClip:
       m_Curve:
       - serializedVersion: 3
         time: 0
-        value: 1.5905919
+        value: 1.5906
         inSlope: 0
         outSlope: 0
         tangentMode: 136

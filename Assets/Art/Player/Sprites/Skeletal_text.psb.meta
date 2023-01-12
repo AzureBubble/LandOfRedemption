@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 389d2366e1db64147aa81dd92ed3e4dd
+guid: 4430ce35fa7552e49a773bb3c6b2c265
 ScriptedImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -33,7 +33,7 @@ ScriptedImporter:
     spriteMeshType: 1
     alignment: 0
     spritePivot: {x: 0.5, y: 0.5}
-    spritePixelsToUnits: 200
+    spritePixelsToUnits: 600
     spriteBorder: {x: 0, y: 0, z: 0, w: 0}
     spriteGenerateFallbackPhysicsShape: 0
     generateCubemap: 6
