@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace Interface
+namespace Interfaces
 { 
 public interface PlayerInterfaces
 {
