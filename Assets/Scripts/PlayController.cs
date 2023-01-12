@@ -3,7 +3,7 @@ using System.Threading;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using Interfaces;
+using Interface;
 
 namespace ClearSky
 {
