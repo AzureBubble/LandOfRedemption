@@ -186,7 +186,11 @@ public class ItemHolder : MonoBehaviour
 
     public void SheildEffectOn(float time)
     {
-        GameObject sheildEffect = Instantiate(this.sheildEffectPrefab, this.gameObject.transform);
+        //Vector3 pos = this.gameObject.transform.position;
+        //pos.x -= 0.2f;
+        //pos.y -= 0.2f;
+        GameObject sheildEffect = Instantiate(this.sheildEffectPrefab,this.gameObject.transform);
+        //sheildEffect.transform.SetParent(this.gameObject.transform, false);
         Destroy(sheildEffect, time);
     }
 

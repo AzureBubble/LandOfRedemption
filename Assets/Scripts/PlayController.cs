@@ -67,7 +67,7 @@ namespace ClearSky
         private LayerMask layer;             // 检测地面的 Layer
 
 
-        private Animator anim;               // 动画
+        public Animator anim;               // 动画
         Vector3 movement;
         private int direction = 1;
         private bool isKickboard = false;
@@ -76,6 +76,11 @@ namespace ClearSky
         [Tooltip("Player 是否获得护盾")]
         [SerializeField]
         private bool isActivateSheild = false;
+
+        private void FixedUpdate()
+        {
+            
+        }
 
         void Start()
         {
@@ -94,18 +99,18 @@ namespace ClearSky
             ChangeGraivity();
             if (!isDie)
             {
-                if(!isActivateSheild)
+                if (!isActivateSheild)
                     Die();
                 Hurt();
                 Attack();
                 Jump();
                 KickBoard();
                 Run();
-
             }
         }
         private void OnTriggerEnter2D(Collider2D other)
         {
+            
             anim.SetBool("isJump", false);
             if(other.tag == "buttom")
             {
@@ -127,17 +132,15 @@ namespace ClearSky
                     ;
                 }
             }
-            if(other.tag == "magma")
+            if (other.tag == "magma")
             {
                 isDie = true;
             }
-            if(other.tag == "monster")
+            if (other.tag == "monster")
             {
                 isDie = true;
             }
         }
-
-
 
         public void ActivateFlash(float distance)
         {
@@ -208,6 +211,13 @@ namespace ClearSky
             }
 
         }
+
+        private void OnDrawGizmos()
+        {
+            Gizmos.color = Color.red;
+            Gizmos.DrawWireSphere(transform.position, checkRadius);
+        }
+
         void Jump()
         {
             isGround = Physics2D.OverlapCircle(transform.position, checkRadius, layer);
@@ -245,12 +255,20 @@ namespace ClearSky
         }
         void Die()
         {
-            if (Input.GetKeyDown(KeyCode.Alpha3))
+            
+            if (isDie)
             {
                 isKickboard = false;
                 anim.SetBool("isKickBoard", false);
                 anim.SetTrigger("die");
-                isDie = true;
+                isDie = false;
+            }
+            if (Input.GetKeyDown(KeyCode.Alpha4))
+            {
+                isKickboard = false;
+                anim.SetBool("isKickBoard", false);
+                anim.SetTrigger("die");
+                isDie = false;
             }
         }
         void Restart()
