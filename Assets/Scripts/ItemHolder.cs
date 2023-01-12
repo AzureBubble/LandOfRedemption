@@ -22,6 +22,7 @@ public class ItemHolder : MonoBehaviour
     private bool isItemSwitched;
     //附近的场景道具
     private List<GameObject> nearbyItems;
+    private GameObject ui;
 
     [SerializeField]
     [Tooltip("键盘输入冷却时间")]
@@ -29,6 +30,9 @@ public class ItemHolder : MonoBehaviour
     [SerializeField]
     [Tooltip("护盾效果预制体")]
     private GameObject sheildEffectPrefab;
+    [SerializeField]
+    [Tooltip("UI名称")]
+    private string UserInterfaceObject = "UserInterface";
 
     // Start is called before the first frame update
     void Start()
@@ -40,6 +44,7 @@ public class ItemHolder : MonoBehaviour
         this.isItemUsed = false;
         this.isItemSwitched = false;
         this.nearbyItems = new List<GameObject>();
+        this.ui = GameObject.Find(this.UserInterfaceObject);
     }
 
     // Update is called once per frame
@@ -88,6 +93,12 @@ public class ItemHolder : MonoBehaviour
                 {
                     Debug.Log("使用" + itemName + "道具");
                     this.collectedItems[itemName].ItemInvoke();
+
+                    // 调用UI展示itemIndex指向的道具
+                    string methodName = "UseItem";
+                    Debug.Log("使用" + this.name + "，向" + ui.name + "发送接口请求" + methodName);
+                    this.ui.SendMessage(methodName);
+
                 }
                 Invoke("SetIsItemUsed", this.coolDownTime);
                 Debug.Log("剩余道具数量" + collectedItems.Count);
@@ -112,12 +123,24 @@ public class ItemHolder : MonoBehaviour
                 this.SetItemIndex(this.itemNames.Count - 1);
                 Invoke("SetIsItemSwitched", this.coolDownTime);
                 Debug.Log("选中第" + this.itemIndex.ToString() + "个道具" + this.itemNames[this.itemIndex] + " 道具总数为" + this.itemNames.Count.ToString());
+
+                // 调用UI展示itemIndex指向的道具
+                string methodName = "ShowItem";
+                Debug.Log("使用" + this.name + "，向" + ui.name + "发送接口请求" + methodName);
+                this.ui.SendMessage(methodName, this.itemNames[this.itemIndex]);
+
             } else if (Input.GetKey(KeyCode.L))
             {
                 this.isItemSwitched = true;
                 this.SetItemIndex(1);
                 Invoke("SetIsItemSwitched", this.coolDownTime);
                 Debug.Log("选中第" + this.itemIndex.ToString() + "个道具" + this.itemNames[this.itemIndex] + " 道具总数为" + this.itemNames.Count.ToString());
+
+                // 调用UI展示itemIndex指向的道具
+                string methodName = "ShowItem";
+                Debug.Log("使用" + this.name + "，向" + ui.name + "发送接口请求" + methodName);
+                this.ui.SendMessage(methodName, this.itemNames[this.itemIndex]);
+
             }
         }
     }
@@ -149,8 +172,20 @@ public class ItemHolder : MonoBehaviour
     {
         this.itemNames.Add(item.GetName());
         this.collectedItems.Add(item.GetName(), item);
-        this.SetItemIndex(0);
+
+        // 调用UI增加道具
         Debug.Log("添加道具" + item.GetName());
+        string methodName = "AddItem";
+        Debug.Log("使用" + this.name + "，向" + ui.name + "发送接口请求" + methodName);
+        this.ui.SendMessage(methodName, item.GetName());
+
+        this.SetItemIndex(0);
+
+        // 调用UI展示itemIndex指向的道具
+        methodName = "ShowItem";
+        Debug.Log("使用" + this.name + "，向" + ui.name + "发送接口请求" + methodName);
+        this.ui.SendMessage(methodName, this.itemNames[this.itemIndex]);
+
     }
 
     public void AddActiveItem(Item item)
@@ -165,9 +200,27 @@ public class ItemHolder : MonoBehaviour
     {
         this.itemNames.Remove(name);
         this.collectedItems.Remove(name);
+
+        // 调用UI移除道具
+        string methodName = "RemoveItem";
+        Debug.Log("使用" + this.name + "，向" + ui.name + "发送接口请求" + methodName);
+        this.ui.SendMessage(methodName, name);
+
         if (this.itemNames.Count > 0)
         {
             this.SetItemIndex(0);
+            // 调用UI展示itemIndex指向的道具
+            methodName = "ShowItem";
+            Debug.Log("使用" + this.name + "，向" + ui.name + "发送接口请求" + methodName);
+            this.ui.SendMessage(methodName, this.itemNames[this.itemIndex]);
+
+        }
+        else
+        {
+            // 调用UI不展示道具
+            methodName = "ShowItem";
+            Debug.Log("使用" + this.name + "，向" + ui.name + "发送接口请求" + methodName);
+            this.ui.SendMessage(methodName, "");
         }
         Debug.Log("移除道具" + name);
     }
