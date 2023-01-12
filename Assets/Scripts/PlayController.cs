@@ -3,7 +3,7 @@ using System.Threading;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using Interfaces;
+using Interface;
 
 namespace ClearSky
 {
@@ -152,22 +152,19 @@ namespace ClearSky
         public void ActivateSheild(float time)
         {
             isActivateSheild = true;
+<<<<<<< Updated upstream
+=======
             Debug.Log("成功");
-<<<<<<< Updated upstream
-<<<<<<< Updated upstream
-            Thread.Sleep(3000);
-            isActivateSheild = false;
-            Debug.Log("取消");
-=======
-=======
 >>>>>>> Stashed changes
             this.Invoke("close", time);
         }
-
         void close()
         {
             isActivateSheild = false;
+<<<<<<< Updated upstream
+=======
             Debug.Log("成功取消");
+>>>>>>> Stashed changes
         }
         public void ToPosition(Vector3 vector)
         {
