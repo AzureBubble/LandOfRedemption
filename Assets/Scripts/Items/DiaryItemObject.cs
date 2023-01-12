@@ -9,17 +9,22 @@ public class DiaryItemObject : MonoBehaviour
     [SerializeField]
     [Tooltip("名称")]
     private string itemName;
+    [SerializeField]
+    [Tooltip("UI名称")]
+    private string UserInterfaceObject = "UserInterface";
 
     private bool isReady;
     private bool isPicked;
     private DiaryItem item;
+    private GameObject ui;
 
     // Start is called before the first frame update
     void Start()
     {
         this.isReady = false;
         this.isPicked = false;
-        this.item = new DiaryItem(this.itemName);
+        this.ui = GameObject.Find(this.UserInterfaceObject);
+        this.item = new DiaryItem(this.itemName, this.ui);
         Invoke("Ready", 1);
     }
 
@@ -56,9 +61,11 @@ namespace Items
     public class DiaryItem: Item
     {
         private bool isUsing;
-        public DiaryItem(string name)
+        private GameObject ui;
+        public DiaryItem(string name, GameObject ui)
         {
             this.name = name;
+            this.ui = ui;
             this.isUsing = false;
         }
 
@@ -66,13 +73,15 @@ namespace Items
         {
             if (!this.isUsing)
             {
-                Debug.Log(this.name + ": 查看日记本");
-                //this.holder.SendMessage("ShowDiaryContent");
+                string methodName = "ShowDiaryContent";
+                Debug.Log("使用" + this.name + "，向" + ui.name + "发送接口请求" + methodName);
+                this.ui.SendMessage(methodName);
             }
             else
             {
-                Debug.Log(this.name + ": 收起日记本");
-                //this.holder.SendMessage("HideDiaryContent");
+                string methodName = "HideDiaryContent";
+                Debug.Log("使用" + this.name + "，向" + ui.name + "发送接口请求" + methodName);
+                this.ui.SendMessage(methodName);
             }
 
             this.isUsing = !this.isUsing;

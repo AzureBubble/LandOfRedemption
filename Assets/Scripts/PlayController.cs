@@ -71,6 +71,8 @@ namespace ClearSky
         Vector3 movement;
         private int direction = 1;
         private bool isKickboard = false;
+        [Tooltip("Player 死亡")]
+        [SerializeField]
         private bool isDie = false;
 
         [Tooltip("Player 是否获得护盾")]
