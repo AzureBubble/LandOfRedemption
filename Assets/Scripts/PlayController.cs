@@ -153,9 +153,19 @@ namespace ClearSky
         {
             isActivateSheild = true;
             Debug.Log("成功");
+<<<<<<< Updated upstream
             Thread.Sleep(3000);
             isActivateSheild = false;
             Debug.Log("取消");
+=======
+            this.Invoke("close", time);
+        }
+
+        void close()
+        {
+            isActivateSheild = false;
+            Debug.Log("成功取消");
+>>>>>>> Stashed changes
         }
         public void ToPosition(Vector3 vector)
         {
