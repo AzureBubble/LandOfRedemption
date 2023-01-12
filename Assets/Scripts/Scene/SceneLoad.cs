@@ -15,8 +15,8 @@ public class SceneLoad : MonoBehaviour
     float fadeTime = 1f;
 
     // 在这里设置 要转到场景的名字
-    const string GAMEPLAY = "Level01";
-    const string GoBack = "TestDemo";
+    const string GAMEPLAY = "Demo";
+    const string GoBack = "StartGame";
 
     Color color;
 
