@@ -95,7 +95,11 @@ namespace ClearSky
             if (!isDie)
             {
                 if(!isActivateSheild)
+                {   
+                    Debug.Log(isDie);
                     Die();
+                    Debug.Log("3");
+                }
                 Hurt();
                 Attack();
                 Jump();
@@ -127,6 +131,7 @@ namespace ClearSky
                     ;
                 }
             }
+
             if(other.tag == "magma")
             {
                 isDie = true;
@@ -135,10 +140,8 @@ namespace ClearSky
             {
                 isDie = true;
             }
+            
         }
-
-
-
         public void ActivateFlash(float distance)
         {
             Vector3 moveVelocity = Vector3.zero;
@@ -148,7 +151,10 @@ namespace ClearSky
             transform.position += moveVelocity;
             Debug.Log(transform.position.x);
         }
-
+        public void ShadowPosition(Vector3 vector)
+        {
+            ;
+        }
         public void ActivateSheild(float time)
         {
             isActivateSheild = true;
@@ -251,12 +257,18 @@ namespace ClearSky
         }
         void Die()
         {
+<<<<<<< Updated upstream
             if (Input.GetKeyDown(KeyCode.Alpha3))
+=======
+            Debug.Log(isDie);
+            if(isDie)
+>>>>>>> Stashed changes
             {
                 isKickboard = false;
                 anim.SetBool("isKickBoard", false);
                 anim.SetTrigger("die");
-                isDie = true;
+                Debug.Log("死亡");
+                isDie = false;
             }
         }
         void Restart()
