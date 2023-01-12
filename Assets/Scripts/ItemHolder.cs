@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Threading;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -21,10 +22,17 @@ public class ItemHolder : MonoBehaviour
     private bool isItemSwitched;
     //附近的场景道具
     private List<GameObject> nearbyItems;
+    private GameObject ui;
 
     [SerializeField]
     [Tooltip("键盘输入冷却时间")]
-    private float coolDownTime;
+    private float coolDownTime = 0.2f;
+    [SerializeField]
+    [Tooltip("护盾效果预制体")]
+    private GameObject sheildEffectPrefab;
+    [SerializeField]
+    [Tooltip("UI名称")]
+    private string UserInterfaceObject = "UserInterface";
 
     // Start is called before the first frame update
     void Start()
@@ -36,6 +44,7 @@ public class ItemHolder : MonoBehaviour
         this.isItemUsed = false;
         this.isItemSwitched = false;
         this.nearbyItems = new List<GameObject>();
+        this.ui = GameObject.Find(this.UserInterfaceObject);
     }
 
     // Update is called once per frame
@@ -64,28 +73,36 @@ public class ItemHolder : MonoBehaviour
         }
     }
 
-    #region 调用itemIndex指向的道具: K键使用 / 调用场景道具：E键使用
+    #region 调用itemIndex指向的道具/调用场景道具：E键使用
     void KeyBoardItemInvoke()
     {
-        if (!this.isItemUsed && Input.GetKey(KeyCode.K) && this.itemNames.Count > 0)
+        if (!this.isItemUsed && Input.GetKey(KeyCode.E))
         {
-            this.isItemUsed = true;
-            string itemName = this.itemNames[this.itemIndex];
-            if (this.collectedItems.ContainsKey(itemName))
+            if (this.nearbyItems.Count > 0)
             {
-                Debug.Log("使用" + itemName + "道具");
-                this.collectedItems[itemName].ItemInvoke();
+                this.isItemUsed = true;
+                this.nearbyItems[0].SendMessage("ItemInvoke");
+                Invoke("SetIsItemUsed", this.coolDownTime);
+                //Debug.Log("使用物体" + this.nearbyItems[0].name);
             }
-            Invoke("SetIsItemUsed", this.coolDownTime);
-            Debug.Log("剩余道具数量" + collectedItems.Count);
-        }
+            else if (this.itemNames.Count > 0)
+            {
+                this.isItemUsed = true;
+                string itemName = this.itemNames[this.itemIndex];
+                if (this.collectedItems.ContainsKey(itemName))
+                {
+                    Debug.Log("使用" + itemName + "道具");
+                    this.collectedItems[itemName].ItemInvoke();
 
-        if (!this.isItemUsed && Input.GetKey(KeyCode.E) && this.nearbyItems.Count > 0)
-        {
-            this.isItemUsed = true;
-            this.nearbyItems[0].SendMessage("ItemInvoke");
-            Invoke("SetIsItemUsed", this.coolDownTime);
-            Debug.Log("使用物体" + this.nearbyItems[0].name);
+                    // 调用UI展示itemIndex指向的道具
+                    string methodName = "UseItem";
+                    Debug.Log("使用" + this.name + "，向" + ui.name + "发送接口请求" + methodName);
+                    this.ui.SendMessage(methodName);
+
+                }
+                Invoke("SetIsItemUsed", this.coolDownTime);
+                Debug.Log("剩余道具数量" + collectedItems.Count);
+            }
         }
     }
 
@@ -106,12 +123,24 @@ public class ItemHolder : MonoBehaviour
                 this.SetItemIndex(this.itemNames.Count - 1);
                 Invoke("SetIsItemSwitched", this.coolDownTime);
                 Debug.Log("选中第" + this.itemIndex.ToString() + "个道具" + this.itemNames[this.itemIndex] + " 道具总数为" + this.itemNames.Count.ToString());
+
+                // 调用UI展示itemIndex指向的道具
+                string methodName = "ShowItem";
+                Debug.Log("使用" + this.name + "，向" + ui.name + "发送接口请求" + methodName);
+                this.ui.SendMessage(methodName, this.itemNames[this.itemIndex]);
+
             } else if (Input.GetKey(KeyCode.L))
             {
                 this.isItemSwitched = true;
                 this.SetItemIndex(1);
                 Invoke("SetIsItemSwitched", this.coolDownTime);
                 Debug.Log("选中第" + this.itemIndex.ToString() + "个道具" + this.itemNames[this.itemIndex] + " 道具总数为" + this.itemNames.Count.ToString());
+
+                // 调用UI展示itemIndex指向的道具
+                string methodName = "ShowItem";
+                Debug.Log("使用" + this.name + "，向" + ui.name + "发送接口请求" + methodName);
+                this.ui.SendMessage(methodName, this.itemNames[this.itemIndex]);
+
             }
         }
     }
@@ -143,8 +172,20 @@ public class ItemHolder : MonoBehaviour
     {
         this.itemNames.Add(item.GetName());
         this.collectedItems.Add(item.GetName(), item);
-        this.SetItemIndex(0);
+
+        // 调用UI增加道具
         Debug.Log("添加道具" + item.GetName());
+        string methodName = "AddItem";
+        Debug.Log("使用" + this.name + "，向" + ui.name + "发送接口请求" + methodName);
+        this.ui.SendMessage(methodName, item.GetName());
+
+        this.SetItemIndex(0);
+
+        // 调用UI展示itemIndex指向的道具
+        methodName = "ShowItem";
+        Debug.Log("使用" + this.name + "，向" + ui.name + "发送接口请求" + methodName);
+        this.ui.SendMessage(methodName, this.itemNames[this.itemIndex]);
+
     }
 
     public void AddActiveItem(Item item)
@@ -159,9 +200,27 @@ public class ItemHolder : MonoBehaviour
     {
         this.itemNames.Remove(name);
         this.collectedItems.Remove(name);
+
+        // 调用UI移除道具
+        string methodName = "RemoveItem";
+        Debug.Log("使用" + this.name + "，向" + ui.name + "发送接口请求" + methodName);
+        this.ui.SendMessage(methodName, name);
+
         if (this.itemNames.Count > 0)
         {
             this.SetItemIndex(0);
+            // 调用UI展示itemIndex指向的道具
+            methodName = "ShowItem";
+            Debug.Log("使用" + this.name + "，向" + ui.name + "发送接口请求" + methodName);
+            this.ui.SendMessage(methodName, this.itemNames[this.itemIndex]);
+
+        }
+        else
+        {
+            // 调用UI不展示道具
+            methodName = "ShowItem";
+            Debug.Log("使用" + this.name + "，向" + ui.name + "发送接口请求" + methodName);
+            this.ui.SendMessage(methodName, "");
         }
         Debug.Log("移除道具" + name);
     }
@@ -177,4 +236,15 @@ public class ItemHolder : MonoBehaviour
     {
         return this.itemNames.Contains(itemName);
     }
+
+    public void SheildEffectOn(float time)
+    {
+        //Vector3 pos = this.gameObject.transform.position;
+        //pos.x -= 0.2f;
+        //pos.y -= 0.2f;
+        GameObject sheildEffect = Instantiate(this.sheildEffectPrefab,this.gameObject.transform);
+        //sheildEffect.transform.SetParent(this.gameObject.transform, false);
+        Destroy(sheildEffect, time);
+    }
+
 }

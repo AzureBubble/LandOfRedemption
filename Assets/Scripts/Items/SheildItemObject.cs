@@ -29,7 +29,7 @@ public class SheildItemObject : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (isPicked)
+        if (this.isPicked)
         {
             Destroy(this.gameObject);
         }
@@ -55,6 +55,7 @@ namespace Items
         private int count;
         //护盾持续时间
         private float time;
+        private GameObject SheildEffectObject;
 
         public SheildItem(string name, float time, int count)
         {
@@ -67,6 +68,7 @@ namespace Items
         {
             this.count--;
             this.holder.SendMessage("ActivateSheild", time);
+            this.holder.SendMessage("SheildEffectOn", time);
             if (this.count <= 0)
             {
                 this.holder.SendMessage("RemoveItem", this.GetName());

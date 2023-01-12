@@ -11,16 +11,17 @@ public class FlashItemObject : MonoBehaviour
     private FlashItem item;
 
     [SerializeField]
-    [Tooltip("道具名称")]
+    [Tooltip("鍚嶇О")]
     private string itemName;
 
     [SerializeField]
-    [Tooltip("使用冷却时间")]
+    [Tooltip("鍐峰嵈鏃堕棿")]
     private float coolDownTime;
 
     [SerializeField]
-    [Tooltip("闪现距离")]
-    private float flashDistance = 1.0f;
+
+    [Tooltip("闂幇璺濈")]
+    private float flashDistance;
 
     // Start is called before the first frame update
     void Start()
@@ -40,7 +41,7 @@ public class FlashItemObject : MonoBehaviour
 
     void OnTriggerEnter2D(Collider2D collider)
     {
-        Debug.Log(this.itemName + "道具触发碰撞");
+        Debug.Log(this.itemName + "閬撳叿鍑哄彂");
         if (Item.IsHolder(collider.gameObject))
         {
             this.item.SetHolder(collider.gameObject);
@@ -81,10 +82,10 @@ namespace Items
                 try
                 {
                     this.isReady = true;
-                    Debug.Log(this.name + "冷却时间结束");
+                    Debug.Log(this.name + "鍐峰嵈鏃堕棿缁撴潫");
                 } catch (Exception)
                 {
-                    Debug.Log(this.name + "冷却时抛出异常,稍后重试");
+                    Debug.Log(this.name + "杩愯鎶涘嚭寮傚父銆傚皢閲嶆柊杩愯");
                     Thread.Sleep(100);
                     this.CoolDown();
                 }

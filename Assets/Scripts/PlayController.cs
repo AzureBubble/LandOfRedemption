@@ -3,7 +3,7 @@ using System.Threading;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using Interface;
+using Interfaces;
 
 namespace ClearSky
 {
@@ -67,15 +67,22 @@ namespace ClearSky
         private LayerMask layer;             // 检测地面的 Layer
 
 
-        private Animator anim;               // 动画
+        public Animator anim;               // 动画
         Vector3 movement;
         private int direction = 1;
         private bool isKickboard = false;
+        [Tooltip("Player 死亡")]
+        [SerializeField]
         private bool isDie = false;
 
         [Tooltip("Player 是否获得护盾")]
         [SerializeField]
         private bool isActivateSheild = false;
+
+        private void FixedUpdate()
+        {
+            
+        }
 
         void Start()
         {
@@ -94,22 +101,18 @@ namespace ClearSky
             ChangeGraivity();
             if (!isDie)
             {
-                if(!isActivateSheild)
-                {   
-                    Debug.Log(isDie);
+                if (!isActivateSheild)
                     Die();
-                    Debug.Log("3");
-                }
                 Hurt();
                 Attack();
                 Jump();
                 KickBoard();
                 Run();
-
             }
         }
         private void OnTriggerEnter2D(Collider2D other)
         {
+            
             anim.SetBool("isJump", false);
             if(other.tag == "buttom")
             {
@@ -131,17 +134,16 @@ namespace ClearSky
                     ;
                 }
             }
-
-            if(other.tag == "magma")
+            if (other.tag == "magma")
             {
                 isDie = true;
             }
-            if(other.tag == "monster")
+            if (other.tag == "monster")
             {
                 isDie = true;
             }
-            
         }
+
         public void ActivateFlash(float distance)
         {
             Vector3 moveVelocity = Vector3.zero;
@@ -151,26 +153,17 @@ namespace ClearSky
             transform.position += moveVelocity;
             Debug.Log(transform.position.x);
         }
-        public void ShadowPosition(Vector3 vector)
-        {
-            ;
-        }
+
         public void ActivateSheild(float time)
         {
             isActivateSheild = true;
-<<<<<<< Updated upstream
-=======
             Debug.Log("成功");
->>>>>>> Stashed changes
             this.Invoke("close", time);
         }
         void close()
         {
             isActivateSheild = false;
-<<<<<<< Updated upstream
-=======
             Debug.Log("成功取消");
->>>>>>> Stashed changes
         }
         public void ToPosition(Vector3 vector)
         {
@@ -220,6 +213,13 @@ namespace ClearSky
             }
 
         }
+
+        private void OnDrawGizmos()
+        {
+            Gizmos.color = Color.red;
+            Gizmos.DrawWireSphere(transform.position, checkRadius);
+        }
+
         void Jump()
         {
             isGround = Physics2D.OverlapCircle(transform.position, checkRadius, layer);
@@ -257,17 +257,19 @@ namespace ClearSky
         }
         void Die()
         {
-<<<<<<< Updated upstream
-            if (Input.GetKeyDown(KeyCode.Alpha3))
-=======
-            Debug.Log(isDie);
-            if(isDie)
->>>>>>> Stashed changes
+            
+            if (isDie)
             {
                 isKickboard = false;
                 anim.SetBool("isKickBoard", false);
                 anim.SetTrigger("die");
-                Debug.Log("死亡");
+                isDie = false;
+            }
+            if (Input.GetKeyDown(KeyCode.Alpha4))
+            {
+                isKickboard = false;
+                anim.SetBool("isKickBoard", false);
+                anim.SetTrigger("die");
                 isDie = false;
             }
         }

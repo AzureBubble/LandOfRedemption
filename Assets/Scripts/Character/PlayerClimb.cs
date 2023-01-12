@@ -4,21 +4,15 @@ using UnityEngine;
 
 public class PlayerClimb : MonoBehaviour
 {
-    /*public enum States
-    {
-        NotClimb,Climb
-    }*/
 
     private Rigidbody2D rb;
-    private PlayerMovement playerMovement;
-    private float climbSpeed = 5;
+    public float climbSpeed = 5;
 
     public bool canClimb = false;
 
     private void Start()
     {
         rb = GetComponent<Rigidbody2D>();
-        playerMovement = GetComponent<PlayerMovement>();
     }
 
     private void Update()
@@ -35,9 +29,6 @@ public class PlayerClimb : MonoBehaviour
 
     private void FixedUpdate()
     {
-        var jumpUpGraivity = playerMovement.jumpUpGraivity;
-        var fallDownGraivity = playerMovement.fallDownGraivity;
-        var gravityScale = rb.gravityScale;
         if (canClimb)
         {
             rb.bodyType = RigidbodyType2D.Kinematic;
