@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Threading;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -24,7 +25,10 @@ public class ItemHolder : MonoBehaviour
 
     [SerializeField]
     [Tooltip("键盘输入冷却时间")]
-    private float coolDownTime;
+    private float coolDownTime = 0.2f;
+    [SerializeField]
+    [Tooltip("护盾效果预制体")]
+    private GameObject sheildEffectPrefab;
 
     // Start is called before the first frame update
     void Start()
@@ -64,28 +68,30 @@ public class ItemHolder : MonoBehaviour
         }
     }
 
-    #region 调用itemIndex指向的道具: K键使用 / 调用场景道具：E键使用
+    #region 调用itemIndex指向的道具/调用场景道具：E键使用
     void KeyBoardItemInvoke()
     {
-        if (!this.isItemUsed && Input.GetKey(KeyCode.K) && this.itemNames.Count > 0)
+        if (!this.isItemUsed && Input.GetKey(KeyCode.E))
         {
-            this.isItemUsed = true;
-            string itemName = this.itemNames[this.itemIndex];
-            if (this.collectedItems.ContainsKey(itemName))
+            if (this.nearbyItems.Count > 0)
             {
-                Debug.Log("使用" + itemName + "道具");
-                this.collectedItems[itemName].ItemInvoke();
+                this.isItemUsed = true;
+                this.nearbyItems[0].SendMessage("ItemInvoke");
+                Invoke("SetIsItemUsed", this.coolDownTime);
+                //Debug.Log("使用物体" + this.nearbyItems[0].name);
             }
-            Invoke("SetIsItemUsed", this.coolDownTime);
-            Debug.Log("剩余道具数量" + collectedItems.Count);
-        }
-
-        if (!this.isItemUsed && Input.GetKey(KeyCode.E) && this.nearbyItems.Count > 0)
-        {
-            this.isItemUsed = true;
-            this.nearbyItems[0].SendMessage("ItemInvoke");
-            Invoke("SetIsItemUsed", this.coolDownTime);
-            Debug.Log("使用物体" + this.nearbyItems[0].name);
+            else if (this.itemNames.Count > 0)
+            {
+                this.isItemUsed = true;
+                string itemName = this.itemNames[this.itemIndex];
+                if (this.collectedItems.ContainsKey(itemName))
+                {
+                    Debug.Log("使用" + itemName + "道具");
+                    this.collectedItems[itemName].ItemInvoke();
+                }
+                Invoke("SetIsItemUsed", this.coolDownTime);
+                Debug.Log("剩余道具数量" + collectedItems.Count);
+            }
         }
     }
 
@@ -177,4 +183,11 @@ public class ItemHolder : MonoBehaviour
     {
         return this.itemNames.Contains(itemName);
     }
+
+    public void SheildEffectOn(float time)
+    {
+        GameObject sheildEffect = Instantiate(this.sheildEffectPrefab, this.gameObject.transform);
+        Destroy(sheildEffect, time);
+    }
+
 }

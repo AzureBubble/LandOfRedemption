@@ -7,12 +7,13 @@ public class BlackBoardObject : MonoBehaviour, ISceneItem
 {
     [SerializeField]
     [Tooltip("名称")]
-    private string name;
+    private string itemName;
+
     private BlackBoardItem item;
     // Start is called before the first frame update
     void Start()
     {
-        this.item = new BlackBoardItem(this.name);
+        this.item = new BlackBoardItem(this.itemName);
     }
 
     // Update is called once per frame
@@ -32,15 +33,26 @@ namespace Items
 {
     public class BlackBoardItem: Item
     {
+        private bool isUsing;
         public BlackBoardItem(string name)
         {
             this.name = name;
+            this.isUsing = false;
         }
 
         public override void ItemInvoke()
         {
-            // 发给UI
-            Debug.Log("使用" + this.name);
+            if (!this.isUsing)
+            {
+                Debug.Log("使用" + this.name);
+                //this.holder.SendMessage("ShowBlackBoardContent");
+            }
+            else
+            {
+                Debug.Log("退出使用" + this.name);
+                //this.holder.SendMessage("HideBlackBoardContent");
+            }
+            this.isUsing = !this.isUsing;
         }
     }
 }

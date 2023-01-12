@@ -3,7 +3,7 @@ using System.Threading;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using Interface;
+using Interfaces;
 
 namespace ClearSky
 {
@@ -73,6 +73,8 @@ namespace ClearSky
         private bool isKickboard = false;
         private bool isDie = false;
 
+        [Tooltip("Player 是否获得护盾")]
+        [SerializeField]
         private bool isActivateSheild = false;
 
         void Start()
@@ -150,8 +152,10 @@ namespace ClearSky
         public void ActivateSheild(float time)
         {
             isActivateSheild = true;
+            Debug.Log("成功");
             Thread.Sleep(3000);
             isActivateSheild = false;
+            Debug.Log("取消");
         }
         public void ToPosition(Vector3 vector)
         {

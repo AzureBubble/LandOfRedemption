@@ -2,12 +2,10 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace Interface
+namespace Interfaces
 { 
 public interface PlayerInterfaces
 {
-    // Start is called before the first frame update
-
     ////激活护盾，参数time：持续时间
     public void ActivateSheild(float time);
 
