@@ -11,7 +11,7 @@ public class PlayerClimb : MonoBehaviour
 
     private Rigidbody2D rb;
     private PlayerMovement playerMovement;
-    private float climbSpeed = 5;
+    public float climbSpeed = 5;
 
     public bool canClimb = false;
 
