@@ -32,7 +32,7 @@ public class KeyItemObject : MonoBehaviour
     void OnTriggerEnter2D(Collider2D collider)
     {
         Debug.Log(this.itemName + "道具触发碰撞");
-        if (Item.IsHolder(collider.gameObject))
+        if (!this.isPicked && Item.IsHolder(collider.gameObject))
         {
             this.item.SetHolder(collider.gameObject);
             collider.gameObject.SendMessage("AddItem", this.item);

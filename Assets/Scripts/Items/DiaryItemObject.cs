@@ -41,7 +41,7 @@ public class DiaryItemObject : MonoBehaviour
     {
         if (!this.isReady) return;
         Debug.Log(this.itemName + "道具触发碰撞");
-        if (Item.IsHolder(collider.gameObject))
+        if (!this.isPicked && Item.IsHolder(collider.gameObject))
         {
             this.item.SetHolder(collider.gameObject);
             collider.gameObject.SendMessage("AddItem", this.item);
