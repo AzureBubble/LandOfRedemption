@@ -17,9 +17,9 @@ namespace ClearSky
         [SerializeField]
         public float moveSpeed = 10.0f;               // 移动速度
 
-        [Tooltip("KickBoard 移动速度")]
+        [Tooltip("Player 冲刺速度")]
         [SerializeField]
-        public float kickBoardMoveSpeed = 20.0f;      // 坐骑移动速度
+        public float kickBoardMoveSpeed = 50.0f;      // 坐骑移动速度
 
         [Tooltip("Player 跳跃力")]
         [SerializeField]
@@ -145,7 +145,6 @@ namespace ClearSky
             Debug.Log(transform.position.x);
             transform.position += moveVelocity;
             Debug.Log(transform.position.x);
-            Thread.Sleep(100);
         }
 
         public void ActivateSheild(float time)
@@ -171,15 +170,10 @@ namespace ClearSky
         }
         void KickBoard()
         {
-            if (Input.GetKeyDown(KeyCode.Alpha4) && isKickboard)
+            if (Input.GetKeyDown(KeyCode.LeftShift))
             {
-                isKickboard = false;
-                anim.SetBool("isKickBoard", false);
-            }
-            else if (Input.GetKeyDown(KeyCode.Alpha4) && !isKickboard )
-            {
-                isKickboard = true;
-                anim.SetBool("isKickBoard", true);
+                Vector2 runVelocity = new Vector2(kickBoardMoveSpeed * transform.localScale.x, rb.velocity.y);
+                rb.velocity = runVelocity;
             }
         }
 
