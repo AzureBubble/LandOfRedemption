@@ -1,4 +1,4 @@
-using System;
+é”˜ç¸°sing System;
 using System.Threading;
 using System.Collections;
 using System.Collections.Generic;
@@ -11,16 +11,17 @@ public class FlashItemObject : MonoBehaviour
     private FlashItem item;
 
     [SerializeField]
-    [Tooltip("µÀ¾ßÃû³Æ")]
+    [Tooltip("é–¬æ’³å¿éšå¶‡Ğ")]
     private string itemName;
 
     [SerializeField]
-    [Tooltip("Ê¹ÓÃÀäÈ´Ê±¼ä")]
+    [Tooltip("æµ£è·¨æ•¤éå³°åµˆéƒå •æ£¿")]
     private float coolDownTime;
 
     [SerializeField]
-    [Tooltip("ÉÁÏÖ¾àÀë")]
-    private float flashDistance = 1.0f;
+
+    [Tooltip("é—‚î†å¹‡ç’ºæ¿ˆî‡")]
+    private float flashDistance;
 
     // Start is called before the first frame update
     void Start()
@@ -40,7 +41,7 @@ public class FlashItemObject : MonoBehaviour
 
     void OnTriggerEnter2D(Collider2D collider)
     {
-        Debug.Log(this.itemName + "µÀ¾ß´¥·¢Åö×²");
+        Debug.Log(this.itemName + "é–¬æ’³å¿ç‘™ï¹€å½‚çº°ç‰ˆæŒ’");
         if (Item.IsHolder(collider.gameObject))
         {
             this.item.SetHolder(collider.gameObject);
@@ -81,10 +82,10 @@ namespace Items
                 try
                 {
                     this.isReady = true;
-                    Debug.Log(this.name + "ÀäÈ´Ê±¼ä½áÊø");
+                    Debug.Log(this.name + "éå³°åµˆéƒå •æ£¿ç¼æ’´æ½«");
                 } catch (Exception)
                 {
-                    Debug.Log(this.name + "ÀäÈ´Ê±Å×³öÒì³£,ÉÔºóÖØÊÔ");
+                    Debug.Log(this.name + "éå³°åµˆéƒèˆµå§é‘å“„ç´“ç”¯ï¿½,ç»‹å¶…æ‚—é–²å¶ˆç˜¯");
                     Thread.Sleep(100);
                     this.CoolDown();
                 }

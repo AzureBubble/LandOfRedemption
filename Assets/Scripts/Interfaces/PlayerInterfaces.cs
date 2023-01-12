@@ -6,8 +6,6 @@ namespace Interface
 { 
 public interface PlayerInterfaces
 {
-    // Start is called before the first frame update
-
     ////激活护盾，参数time：持续时间
     public void ActivateSheild(float time);
 
