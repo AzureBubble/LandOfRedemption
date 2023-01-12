@@ -29,7 +29,7 @@ public class SheildItemObject : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (isPicked)
+        if (this.isPicked)
         {
             Destroy(this.gameObject);
         }
