@@ -29,7 +29,6 @@ public class ItemHolder : MonoBehaviour
     [SerializeField]
     [Tooltip("护盾效果预制体")]
     private GameObject sheildEffectPrefab;
-    private GameObject sheildEffect;
 
     // Start is called before the first frame update
     void Start()
@@ -187,13 +186,8 @@ public class ItemHolder : MonoBehaviour
 
     public void SheildEffectOn(float time)
     {
-        this.sheildEffect = Instantiate(this.sheildEffectPrefab, this.gameObject.transform);
-        Invoke("SheildEffectOff", time);
-    }
-
-    public void SheildEffectOff()
-    {
-        Destroy(this.sheildEffect);
+        GameObject sheildEffect = Instantiate(this.sheildEffectPrefab, this.gameObject.transform);
+        Destroy(sheildEffect, time);
     }
 
 }

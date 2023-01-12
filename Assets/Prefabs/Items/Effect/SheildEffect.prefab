@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 278613641894919777}
   - component: {fileID: 278613641894919776}
   m_Layer: 0
-  m_Name: SheildEffectPrefab
+  m_Name: SheildEffect
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

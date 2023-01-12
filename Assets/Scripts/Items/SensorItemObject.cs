@@ -13,16 +13,24 @@ public class SensorItemObject : MonoBehaviour
     [SerializeField]
     [Tooltip("激活过期时间")]
     private float expiredTime;
+    [SerializeField]
+    [Tooltip("图片")]
+    private Sprite[] sprites;
+
     //传感器激活的门
     private GameObject sensorDoor;
     private bool isConnected;
     private SensorItem item;
+    private SpriteRenderer sr;
+    private int sIndex;
 
     // Start is called before the first frame update
     void Start()
     {
         this.isConnected = false;
         this.item = new SensorItem(this.itemName, this.expiredTime);
+        this.sr = GetComponent<SpriteRenderer>();
+        this.sIndex = 0;
     }
 
     // Update is called once per frame
@@ -32,11 +40,23 @@ public class SensorItemObject : MonoBehaviour
         if (this.sensorDoor)
         {
             this.isConnected = true;
+            if (this.item.GetIsActivated())
+            {
+                this.sIndex = (this.sIndex + 1 >= this.sprites.Length) ? this.sprites.Length - 1 : this.sIndex + 1;
+                sr.sprite = sprites[sIndex];
+            }
+            else
+            {
+                this.sIndex = (this.sIndex - 1 <= 0) ? 0 : this.sIndex - 1;
+                sr.sprite = sprites[sIndex];
+            }
         }
         else
         {
             this.isConnected = false;
         }
+
+
     }
 
     void OnTriggerEnter2D(Collider2D collider)
@@ -94,6 +114,11 @@ namespace Items
                     this.CoolDown();
                 }
             }, null, (int)(this.expiredTime * 1000), Timeout.Infinite);
+        }
+
+        public bool GetIsActivated()
+        {
+            return this.isActivated;
         }
     }
 }

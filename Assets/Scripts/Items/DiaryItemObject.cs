@@ -10,14 +10,17 @@ public class DiaryItemObject : MonoBehaviour
     [Tooltip("名称")]
     private string itemName;
 
+    private bool isReady;
     private bool isPicked;
     private DiaryItem item;
 
     // Start is called before the first frame update
     void Start()
     {
+        this.isReady = false;
         this.isPicked = false;
         this.item = new DiaryItem(this.itemName);
+        Invoke("Ready", 1);
     }
 
     // Update is called once per frame
@@ -31,6 +34,7 @@ public class DiaryItemObject : MonoBehaviour
 
     void OnTriggerEnter2D(Collider2D collider)
     {
+        if (!this.isReady) return;
         Debug.Log(this.itemName + "道具触发碰撞");
         if (Item.IsHolder(collider.gameObject))
         {
@@ -38,6 +42,11 @@ public class DiaryItemObject : MonoBehaviour
             collider.gameObject.SendMessage("AddItem", this.item);
             this.isPicked = true;
         }
+    }
+
+    private void Ready()
+    {
+        this.isReady = true;
     }
 
 }

@@ -27,11 +27,11 @@ namespace Interfaces
         //输入密码UI， number：0-9的数字字符
         public void InputPassword(char number);
 
-        //道具移除时的UI展示，name：道具名称，type：道具种类
-        public void RemoveItem(string name, string type);
+        //道具移除时的UI展示，name：道具名称
+        public void RemoveItem(string name);
 
-        //道具加入时的UI展示，name：道具名称，type：道具种类
-        public void AddItem(string name, string type);
+        //道具加入时的UI展示，name：道具名称
+        public void AddItem(string name);
 
         //向左切换道具时的UI展示，leftItemName:道具栏左移后的道具名供校准
         public void SwitchItemLeft(string leftItemName);
