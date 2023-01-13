@@ -18,6 +18,8 @@ public class SceneLoad : MonoBehaviour
     const int GAMEPLAY = 0;
     const string GoBack = "TestDemo";
 
+    //public GameObject prefabs;
+
     Color color;
 
     IEnumerator LoadCoroutine(int newScene)
@@ -30,7 +32,8 @@ public class SceneLoad : MonoBehaviour
         // 淡出
         while (color.a < 1f)  // 调整图片alpha 透明度
         {
-            color.a = Mathf.Clamp01(color.a + Time.unscaledDeltaTime / fadeTime); // unscaledDetaltaTime不会受到时间规模的影响
+            //color.a Mathf.Clamp01(color.a + Time.unscaledDeltaTime / fadeTime); // unscaledDetaltaTime不会受到时间规模的影响
+            color.a += Time.deltaTime / fadeTime;
             //Mathf.Clamp01()  将浮点数变量控制在0——1直接 防止溢出
             transtionImage.color = color;
             yield return null;
@@ -42,9 +45,10 @@ public class SceneLoad : MonoBehaviour
 
 
         // 淡入
-        while (color.a > 0f)
+        while (color.a != 0f)
         {
-            color.a = Mathf.Clamp01(color.a - Time.unscaledDeltaTime / fadeTime);
+            //color.a = Mathf.Clamp01(color.a - Time.unscaledDeltaTime / fadeTime);
+            color.a -= Time.deltaTime / fadeTime;
             transtionImage.color = color;
             yield return null;
         }
@@ -71,5 +75,8 @@ public class SceneLoad : MonoBehaviour
     {
         Invoke("NextScene", 1f);
     }
-
+   /* private void Awake()
+    {
+        DontDestroyOnLoad(gameObject);   
+    }*/
 }
