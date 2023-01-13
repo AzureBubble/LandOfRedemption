@@ -222,7 +222,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2614c3d5879cf6b47abf18daeee6ad4c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  transtionImage: {fileID: 2524968122090526508}
   fadeTime: 1
-  canvasGroup: {fileID: 0}
-  fadOutTime: 0
-  fadInTime: 0

@@ -29,9 +29,12 @@ public class UIController : MonoBehaviour , IUIforItemInterface
         else
         {
             this.HideAll();
-            if (dic_total_ui.ContainsKey(name))
+            foreach(var dic in dic_total_ui)
             {
-                dic_total_ui[name].SetActive(true);
+                if (name.Contains(dic.Key))
+                {
+                    dic_total_ui[dic.Key].SetActive(true);
+                }
             }
         }
     }
