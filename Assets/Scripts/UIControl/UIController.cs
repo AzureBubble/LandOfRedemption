@@ -7,62 +7,56 @@ using System.Linq;
 public class UIController : MonoBehaviour , IUIforItemInterface
 {
     Dictionary<string, GameObject> dic_total_ui = new Dictionary<string, GameObject>();
-    Dictionary<string, GameObject> dic_current = new Dictionary<string, GameObject>();
+    //Dictionary<string, GameObject> dic_current = new Dictionary<string, GameObject>();
     public GameObject skillReversePanel;
     public GameObject skillShieldPanel;
     public GameObject skillDashPanel;
     public GameObject inputListen;
     void Start()
     {
-        dic_total_ui.Add("SkillReverse", skillReversePanel);
-        dic_total_ui.Add("SkillShield", skillShieldPanel);
-        dic_total_ui.Add("SkillDash", skillDashPanel);
+        dic_total_ui.Add("Shadow", skillReversePanel);
+        dic_total_ui.Add("Sheild", skillShieldPanel);
+        dic_total_ui.Add("Flash", skillDashPanel);
+        this.HideAll();
     }
     //显示特定道具
     public void ShowItem(string name)
     {
         if (name.Equals(""))
         {
-            for (int i = 0; i < dic_total_ui.Count; i++) 
-            { 
-                dic_total_ui.ElementAt(i).Value.SetActive(false);
-            }
+            this.HideAll();
         }
         else
         {
-            //显示参数name对应的gameobject
-            for (int i = 0; i < dic_total_ui.Count; i++)
+            this.HideAll();
+            if (dic_total_ui.ContainsKey(name))
             {
-                if (name.Equals(dic_total_ui.ElementAt(i).Key))
-                {
-                    dic_total_ui.ElementAt(i).Value.SetActive(true);
-                }
-                else dic_total_ui.ElementAt(i).Value.SetActive(false);
+                dic_total_ui[name].SetActive(true);
             }
         }
     }
     //道具移除时的UI展示，name：道具名称，type：道具种类
     public void AddItem(string name)
     {
-        for (int i = 0; i < dic_total_ui.Count; i++)
+        /*for (int i = 0; i < dic_total_ui.Count; i++)
         {
             if (name.Equals(dic_total_ui.ElementAt(i).Key))
             {
                 dic_current.Add(name,dic_total_ui.ElementAt(i).Value);
                 ShowItem(name);
             }
-        }
+        }*/
     }
     //道具移除时的UI展示，name：道具名称，type：道具种类
     public void RemoveItem(string name)
     {
-        for (int i = 0; i < dic_total_ui.Count; i++)
+        /*for (int i = 0; i < dic_total_ui.Count; i++)
         {
             if (name.Equals(dic_total_ui.ElementAt(i).Key))
             {
                 dic_current.Remove(name);
             }
-        }
+        }*/
     }
     //使用道具后的反馈
     public void UseItem()
@@ -111,6 +105,14 @@ public class UIController : MonoBehaviour , IUIforItemInterface
     public void InputClear()
     {
 
+    }
+
+    public void HideAll()
+    {
+        foreach (var each in dic_total_ui)
+        {
+            each.Value.SetActive(false);
+        }
     }
 
     
