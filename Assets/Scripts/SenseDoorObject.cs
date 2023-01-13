@@ -36,7 +36,7 @@ public class SenseDoorObject : MonoBehaviour
         this.origin = this.gameObject.transform.position;
         foreach (var sensor in sensors)
         {
-            Debug.Log("与" + sensor.name + "建立链接");
+            Debug.Log(this.doorName + "与" + sensor.name + "建立链接");
             sensor.SendMessage("BuildLink", this.gameObject);
         }
     }

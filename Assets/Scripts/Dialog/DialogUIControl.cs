@@ -17,7 +17,7 @@ public class DialogUIControl : MonoBehaviour
         if (collision.gameObject.tag == "Player")
         {
             Button_dialogue.SetActive(true);
-
+            print("enter collision");
         }
     }
 
@@ -34,7 +34,7 @@ public class DialogUIControl : MonoBehaviour
 
     private void Update()
     {
-        if (Button_dialogue.activeSelf && Input.GetKeyDown(KeyCode.R))
+        if(Button_dialogue.activeSelf && Input.GetKeyDown(KeyCode.R))
         {
             TalkUI.SetActive(true);
         }

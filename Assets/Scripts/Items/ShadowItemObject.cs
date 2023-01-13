@@ -36,9 +36,9 @@ public class ShadowItemObject : MonoBehaviour
 
     void OnTriggerEnter2D(Collider2D collider)
     {
-        Debug.Log(this.itemName + "道具触发碰撞");
         if (Item.IsHolder(collider.gameObject))
         {
+            Debug.Log(this.itemName + "道具触发碰撞");
             this.item.SetHolder(collider.gameObject);
             this.item.Start();
             collider.gameObject.SendMessage("AddActiveItem", this.item);

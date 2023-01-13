@@ -5,18 +5,18 @@ using UnityEngine.SceneManagement;
 
 public class SceneLoad : MonoBehaviour
 {
-    // ×öÒ»¸öÓÎÏ·³¡¾°ÇÐ»»µÄµ­³öÐ§¹û
-    [Header("³¡¾°×ª»» ÊôÐÔ")]
-    [Tooltip("UI µ­Èëµ­³öÍ¼Ïñ")]
+    // ï¿½ï¿½Ò»ï¿½ï¿½ï¿½ï¿½Ï·ï¿½ï¿½ï¿½ï¿½ï¿½Ð»ï¿½ï¿½Äµï¿½ï¿½ï¿½Ð§ï¿½ï¿½
+    [Header("ï¿½ï¿½ï¿½ï¿½×ªï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½")]
+    [Tooltip("UI ï¿½ï¿½ï¿½ëµ­ï¿½ï¿½Í¼ï¿½ï¿½")]
     [SerializeField]
     public UnityEngine.UI.Image transtionImage;
-    [Tooltip("UI µ­³öµ­ÈëÊ±¼ä")]
+    [Tooltip("UI ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ê±ï¿½ï¿½")]
     [SerializeField]
     float fadeTime = 1f;
 
-    // ÔÚÕâÀïÉèÖÃ Òª×ªµ½³¡¾°µÄÃû×Ö
-    const int GAMEPLAY = 0;
-    const string GoBack = "TestDemo";
+    // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ Òª×ªï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+    const string GAMEPLAY = "Demo";
+    const string GoBack = "StartGame";
 
     //public GameObject prefabs;
 
@@ -24,27 +24,27 @@ public class SceneLoad : MonoBehaviour
 
     IEnumerator LoadCoroutine(int newScene)
     {
-        // Òì²½¼ÓÔØ ½â¾ö»­Ãæ¿¨¶ÙÎÊÌâ
+        // ï¿½ì²½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½æ¿¨ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
         var loadingOperation = SceneManager.LoadSceneAsync(newScene);
         loadingOperation.allowSceneActivation = false;
 
         transtionImage.gameObject.SetActive(true);
-        // µ­³ö
-        while (color.a < 1f)  // µ÷ÕûÍ¼Æ¬alpha Í¸Ã÷¶È
+        // ï¿½ï¿½ï¿½ï¿½
+        while (color.a < 1f)  // ï¿½ï¿½ï¿½ï¿½Í¼Æ¬alpha Í¸ï¿½ï¿½ï¿½ï¿½
         {
-            //color.a Mathf.Clamp01(color.a + Time.unscaledDeltaTime / fadeTime); // unscaledDetaltaTime²»»áÊÜµ½Ê±¼ä¹æÄ£µÄÓ°Ïì
+            //color.a Mathf.Clamp01(color.a + Time.unscaledDeltaTime / fadeTime); // unscaledDetaltaTimeï¿½ï¿½ï¿½ï¿½ï¿½Üµï¿½Ê±ï¿½ï¿½ï¿½Ä£ï¿½ï¿½Ó°ï¿½ï¿½
             color.a += Time.deltaTime / fadeTime;
-            //Mathf.Clamp01()  ½«¸¡µãÊý±äÁ¿¿ØÖÆÔÚ0¡ª¡ª1Ö±½Ó ·ÀÖ¹Òç³ö
+            //Mathf.Clamp01()  ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½0ï¿½ï¿½ï¿½ï¿½1Ö±ï¿½ï¿½ ï¿½ï¿½Ö¹ï¿½ï¿½ï¿½
             transtionImage.color = color;
             yield return null;
         }
 
         //yield return new WaitUntil(() => loadingOperation.progress >= 0.9);
-        loadingOperation.allowSceneActivation = true;// ¼ÓÔØ³¡¾°
+        loadingOperation.allowSceneActivation = true;// ï¿½ï¿½ï¿½Ø³ï¿½ï¿½ï¿½
         //Load(sceneName);
 
 
-        // µ­Èë
+        // ï¿½ï¿½ï¿½ï¿½
         while (color.a != 0f)
         {
             //color.a = Mathf.Clamp01(color.a - Time.unscaledDeltaTime / fadeTime);

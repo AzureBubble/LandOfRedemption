@@ -26,7 +26,7 @@ public class DialogSystem : MonoBehaviour
     public int columnNum;
     [Tooltip("控制文本速度")]
     [SerializeField]
-    public float textSpeed;
+    public float textSpeed; 
 
     bool textFinished;
 

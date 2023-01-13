@@ -61,9 +61,9 @@ public class SensorItemObject : MonoBehaviour
 
     void OnTriggerEnter2D(Collider2D collider)
     {
-        Debug.Log(this.itemName + "道具触发碰撞");
         if (this.isConnected && Item.IsHolder(collider.gameObject))
         {
+            Debug.Log(this.itemName + "道具触发碰撞");
             this.item.SetHolder(this.sensorDoor);
             this.item.ItemInvoke();
         }

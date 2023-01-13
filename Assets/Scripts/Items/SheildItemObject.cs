@@ -37,9 +37,9 @@ public class SheildItemObject : MonoBehaviour
 
     void OnTriggerEnter2D(Collider2D collider)
     {
-        Debug.Log(this.itemName + "道具触发碰撞");
         if (!this.isPicked && Item.IsHolder(collider.gameObject))
         {
+            Debug.Log(this.itemName + "道具触发碰撞");
             this.item.SetHolder(collider.gameObject);
             collider.gameObject.SendMessage("AddItem", this.item);
             this.isPicked = true;
