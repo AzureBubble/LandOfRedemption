@@ -30,6 +30,10 @@ public class DoorTextLoad : MonoBehaviour
     public float textSpeed;
 
     bool textFinished;
+    bool isDoor;
+
+
+
 
     List<string> textList = new List<string>();
     void Awake()
@@ -53,7 +57,7 @@ public class DoorTextLoad : MonoBehaviour
         {
             index = 0;
             TalkUI.SetActive(false);
-            //Invoke("LoadScene", 1f);
+            Invoke("LoadScene", 1f);
             return;
         }
 
@@ -78,10 +82,17 @@ public class DoorTextLoad : MonoBehaviour
         }
     }
 
-    /*void LoadScene()
+    void LoadScene()
+    {
+        if (isDoor)
+            Invoke("LoadSceneManager",1f);
+            
+    }
+
+    void LoadSceneManager()
     {
         SceneManager.LoadScene("StartGame");
-    }*/
+    }
 
     IEnumerator SetTextUI()
     {
@@ -96,5 +107,14 @@ public class DoorTextLoad : MonoBehaviour
         textFinished = true;
         index++;
 
+    }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        isDoor = true;
+    }
+    private void OnTriggerExit2D(Collider2D collision)
+    {
+        isDoor = false;
     }
 }

@@ -30,6 +30,7 @@ public class DialogSystem : MonoBehaviour
     public float textSpeed; 
 
     bool textFinished;
+    //bool isDoor;
 
     List<string> textList = new List<string>();
     void Awake()
@@ -53,7 +54,6 @@ public class DialogSystem : MonoBehaviour
         {
             index = 0;
             TalkUI.SetActive(false);
-            //Invoke("LoadScene",1f);
             return;
         }
 
@@ -77,12 +77,6 @@ public class DialogSystem : MonoBehaviour
             textList.Add(line);  // 将分隔好的东西添加进LIst
         }
     }
-
-    /*void LoadScene()
-    {
-        SceneManager.LoadScene("StartGame");
-    }*/
-
     IEnumerator SetTextUI()
     {
         textFinished = false;
@@ -97,4 +91,14 @@ public class DialogSystem : MonoBehaviour
         index++;
 
     }
+
+    /*private void OnTriggerEnter2D(Collider2D collision)
+    {
+        isDoor= true;
+    }
+
+    private void OnTriggerExit2D(Collider2D collision)
+    {
+        isDoor= false;
+    }*/
 }

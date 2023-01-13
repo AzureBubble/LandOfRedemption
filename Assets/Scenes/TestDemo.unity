@@ -861,6 +861,14 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1747548239852898964, guid: 4630d44c1f24f0c459c535f5127bbefd, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1747548240783013063, guid: 4630d44c1f24f0c459c535f5127bbefd, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 1747548241403739570, guid: 4630d44c1f24f0c459c535f5127bbefd, type: 3}
       propertyPath: m_Name
       value: all_cavas
