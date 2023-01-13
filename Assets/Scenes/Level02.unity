@@ -2310,7 +2310,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 519420028}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -26.955986, y: 37.49951, z: -10}
+  m_LocalPosition: {x: -27.975992, y: 39.49951, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -10039,6 +10039,23 @@ Tilemap:
     e31: 0
     e32: 0
     e33: 1
+--- !u!1 &724277250 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 3496658271280691027, guid: b1bf501124793454d9bd508c1c0aa595, type: 3}
+  m_PrefabInstance: {fileID: 1886169654}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &724277254
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 724277250}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f44302ceca7a57a40aa38f4b80625f80, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &734002155
 GameObject:
   m_ObjectHideFlags: 0
@@ -12604,7 +12621,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7936284513921743120, guid: 180bc355043ee794790d54fb9e7f3924, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8017944936313939302, guid: 180bc355043ee794790d54fb9e7f3924, type: 3}
       propertyPath: m_RootOrder
@@ -15313,7 +15330,8 @@ PrefabInstance:
       propertyPath: m_Name
       value: LoadNextScene
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 3496658271280691024, guid: b1bf501124793454d9bd508c1c0aa595, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: b1bf501124793454d9bd508c1c0aa595, type: 3}
 --- !u!1 &1902605286 stripped
 GameObject:
@@ -34021,7 +34039,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4154254771036040311, guid: 837b5fa4c81363b47bb6b7108b5fe27a, type: 3}
       propertyPath: m_TrackedObjectOffset.y
-      value: -2
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4154254771802366213, guid: 837b5fa4c81363b47bb6b7108b5fe27a, type: 3}
       propertyPath: m_Name
@@ -34037,11 +34055,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4154254771802366235, guid: 837b5fa4c81363b47bb6b7108b5fe27a, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -26.955986
+      value: -27.975992
       objectReference: {fileID: 0}
     - target: {fileID: 4154254771802366235, guid: 837b5fa4c81363b47bb6b7108b5fe27a, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 37.49951
+      value: 39.49951
       objectReference: {fileID: 0}
     - target: {fileID: 4154254771802366235, guid: 837b5fa4c81363b47bb6b7108b5fe27a, type: 3}
       propertyPath: m_LocalPosition.z

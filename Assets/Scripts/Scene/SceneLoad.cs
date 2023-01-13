@@ -72,9 +72,9 @@ public class SceneLoad : MonoBehaviour
         Invoke("NextScene",0f);
     }
 
-    public void ExitGame()
+   /* public void ExitGame()
     {
         Application.Quit();
-    }
+    }*/
 
 }

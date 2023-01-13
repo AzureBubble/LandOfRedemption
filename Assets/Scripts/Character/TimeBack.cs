@@ -26,14 +26,14 @@ public class TimeBack : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.J))
+        if (Input.GetKeyDown(KeyCode.U))
         {
             if (Time.time >= lastRecordTime + coolTime)
             {
                 ReadyTimeBack();
             }
         }
-        if (Input.GetKeyDown(KeyCode.K) && BackPos != null)// && BackPos != null
+        if (Input.GetKeyDown(KeyCode.I) && BackPos != null)// && BackPos != null
         {
             ReturnToPos();
         }
