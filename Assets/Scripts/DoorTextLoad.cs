@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
-public class DialogSystem : MonoBehaviour
+public class DoorTextLoad : MonoBehaviour
 {
 
     [Header("UI")]
@@ -27,7 +27,7 @@ public class DialogSystem : MonoBehaviour
     public int columnNum;
     [Tooltip("控制文本速度")]
     [SerializeField]
-    public float textSpeed; 
+    public float textSpeed;
 
     bool textFinished;
 
@@ -53,7 +53,7 @@ public class DialogSystem : MonoBehaviour
         {
             index = 0;
             TalkUI.SetActive(false);
-            //Invoke("LoadScene",1f);
+            //Invoke("LoadScene", 1f);
             return;
         }
 

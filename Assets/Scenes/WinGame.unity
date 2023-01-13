@@ -423,7 +423,7 @@ AudioSource:
   m_PlayOnAwake: 1
   m_Volume: 1
   m_Pitch: 1
-  Loop: 0
+  Loop: 1
   Mute: 0
   Spatialize: 0
   SpatializePostEffects: 0
@@ -831,7 +831,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1598292899}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 5f824204898ab764d877830471a2627f, type: 3}
   m_Name: 
@@ -856,6 +856,24 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Button_dialogue: {fileID: 750851001}
   TalkUI: {fileID: 1996618366}
+--- !u!114 &1598292914
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1598292899}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4d77255f2e187384cafa8921c5114376, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  textLabel: {fileID: 1314448972}
+  textFile: {fileID: 4900000, guid: dd2b42da4623a0346895201731053a3e, type: 3}
+  TalkUI: {fileID: 1996618366}
+  index: 1
+  columnNum: 2
+  textSpeed: 0.1
 --- !u!1 &1958141037 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 4626998513663794186, guid: 3421b391f4d87684d83cd3329d01d9bf, type: 3}
@@ -1508,7 +1526,7 @@ PrefabInstance:
       objectReference: {fileID: 1996618366}
     - target: {fileID: 1471007867434036831, guid: b27ccf7679a02204488973e7e05cd533, type: 3}
       propertyPath: m_SortingOrder
-      value: 2
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 1471007867434036831, guid: b27ccf7679a02204488973e7e05cd533, type: 3}
       propertyPath: m_SortingLayerID
@@ -3310,6 +3328,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 8802742605879577016, guid: 6a9f8936968623d4eba4352571daa07e, type: 3}
+      propertyPath: m_DynamicPixelsPerUnit
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 8802742605879577018, guid: 6a9f8936968623d4eba4352571daa07e, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5
@@ -3416,7 +3438,7 @@ MonoBehaviour:
   textFile: {fileID: 4900000, guid: 2bc0e3e34eac68c47a981853843d8908, type: 3}
   TalkUI: {fileID: 134538100}
   index: 1
-  columnNum: 5
+  columnNum: 6
   textSpeed: 0.1
 --- !u!114 &9166409349360715574
 MonoBehaviour:
