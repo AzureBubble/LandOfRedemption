@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class DialogSystem : MonoBehaviour
@@ -52,6 +53,7 @@ public class DialogSystem : MonoBehaviour
         {
             index = 0;
             TalkUI.SetActive(false);
+            //Invoke("LoadScene",1f);
             return;
         }
 
@@ -75,6 +77,11 @@ public class DialogSystem : MonoBehaviour
             textList.Add(line);  // 将分隔好的东西添加进LIst
         }
     }
+
+    /*void LoadScene()
+    {
+        SceneManager.LoadScene("StartGame");
+    }*/
 
     IEnumerator SetTextUI()
     {

@@ -1,5 +1,133 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!1 &1363157505
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1363157507}
+  - component: {fileID: 1363157506}
+  m_Layer: 0
+  m_Name: Jump
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1363157507
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1363157505}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 26.39, y: -36.13, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 4430200942589606740}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!82 &1363157506
+AudioSource:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1363157505}
+  m_Enabled: 1
+  serializedVersion: 4
+  OutputAudioMixerGroup: {fileID: 0}
+  m_audioClip: {fileID: 8300000, guid: 042ef2a505f6d614fab57f5937e50e92, type: 3}
+  m_PlayOnAwake: 0
+  m_Volume: 1
+  m_Pitch: 1
+  Loop: 0
+  Mute: 0
+  Spatialize: 0
+  SpatializePostEffects: 0
+  Priority: 128
+  DopplerLevel: 1
+  MinDistance: 1
+  MaxDistance: 500
+  Pan2D: 0
+  rolloffMode: 0
+  BypassEffects: 0
+  BypassListenerEffects: 0
+  BypassReverbZones: 0
+  rolloffCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 1
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  panLevelCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  spreadCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  reverbZoneMixCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
 --- !u!1 &4430200942589606730
 GameObject:
   m_ObjectHideFlags: 0
@@ -37,6 +165,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 7679249056248311748}
+  - {fileID: 1363157507}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -109,6 +238,21 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c6b0a5a5f371b3247b5995e34f178f7a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  OnJump:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1363157506}
+        m_TargetAssemblyTypeName: UnityEngine.AudioSource, UnityEngine
+        m_MethodName: Play
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
   moveSpeed: 5
   kickBoardMoveSpeed: 10
   jumpForce: 5
@@ -116,7 +260,6 @@ MonoBehaviour:
   isJump: 0
   minJumpTime: 0.2
   maxJumpTime: 0.5
-  currentJumpTime: 0.5
   jumpUpGraivity: 0.5
   fallDownGraivity: 1
   isGround: 1
@@ -125,7 +268,10 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 1024
   anim: {fileID: 0}
+  isDie: 0
   isActivateSheild: 0
+  startTime: 0
+  coolTime: 2
 --- !u!114 &7647281172712176998
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -140,6 +286,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   coolDownTime: 0.2
   sheildEffectPrefab: {fileID: 278613641894919783, guid: 50185d7c5d163a24ebea270a4dcba35f, type: 3}
+  UserInterfaceObject: UserInterface
 --- !u!114 &8965484907160049969
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -152,7 +299,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: eeb9fd00fc6ffe74ebbc543f23bf7525, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  climbSpeed: 5
   canClimb: 0
 --- !u!61 &8965484907160049966
 BoxCollider2D:
@@ -376,7 +522,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -5542658179501783668, guid: 4430ce35fa7552e49a773bb3c6b2c265, type: 3}
       propertyPath: m_Bounds.m_Center.x
-      value: -0.02096989
+      value: -0.020971797
       objectReference: {fileID: 0}
     - target: {fileID: -5542658179501783668, guid: 4430ce35fa7552e49a773bb3c6b2c265, type: 3}
       propertyPath: m_Bounds.m_Center.y
@@ -432,7 +578,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -3055240814217710258, guid: 4430ce35fa7552e49a773bb3c6b2c265, type: 3}
       propertyPath: m_Bounds.m_Center.x
-      value: -0.004414156
+      value: -0.0044145286
       objectReference: {fileID: 0}
     - target: {fileID: -3055240814217710258, guid: 4430ce35fa7552e49a773bb3c6b2c265, type: 3}
       propertyPath: m_Bounds.m_Center.y
@@ -440,7 +586,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -3055240814217710258, guid: 4430ce35fa7552e49a773bb3c6b2c265, type: 3}
       propertyPath: m_Bounds.m_Extent.x
-      value: 0.17577419
+      value: 0.17577398
       objectReference: {fileID: 0}
     - target: {fileID: -3055240814217710258, guid: 4430ce35fa7552e49a773bb3c6b2c265, type: 3}
       propertyPath: m_Bounds.m_Extent.y
@@ -560,7 +706,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -1164967229044027008, guid: 4430ce35fa7552e49a773bb3c6b2c265, type: 3}
       propertyPath: m_Bounds.m_Center.x
-      value: -0.0000038146973
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: -1164967229044027008, guid: 4430ce35fa7552e49a773bb3c6b2c265, type: 3}
       propertyPath: m_Bounds.m_Center.y

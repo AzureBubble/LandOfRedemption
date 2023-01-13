@@ -4,11 +4,13 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using Interfaces;
+using UnityEngine.Events;
 
 namespace ClearSky
 {
     public class PlayController : MonoBehaviour, PlayerInterfaces
     {
+        public UnityEvent OnJump = new UnityEvent();
         private Rigidbody2D rb;
         private float inputX, inputY;
 
@@ -236,6 +238,7 @@ namespace ClearSky
                 isJump = true;
                 anim.SetBool("isJump", true);
                 --jumpCount;
+                OnJump?.Invoke();
             }
             if (!isJump)
                 return;
